@@ -9,7 +9,7 @@ add_subdirectory(libs/glfw)
 
 # Add include directories
 include_directories(include)  # Your local project include directory
-include_directories(libs/glfw/include/GLFW)  # GLFW's include directory
+include_directories(libs/glfw/include)  # GLFW's include directory
 
 # Define executable and link libraries
 add_executable(ParticleSimulation src/main.c src/particles.c src/verlet.c)
