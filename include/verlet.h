@@ -1,6 +1,6 @@
 #ifndef __VERLET_H__
 #define __VERLET_H__
-#include "math.h"
+#include "cmath.h"
 
 #define ContainerRadius 6.0f
 #define VerletRadius 0.15f
