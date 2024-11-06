@@ -9,7 +9,7 @@
 typedef struct {
   mfloat_t T[VEC3_SIZE]; // current particle position
   mfloat_t deltaT[VEC3_SIZE]; // previous particle position
-  mfloat_t a[VEC_SIZE] // particle acceleration
+  mfloat_t a[VEC3_SIZE]; // particle acceleration
   mfloat_t radius;
 } ParticleObject;
 
@@ -26,8 +26,8 @@ void force(ParticleObject* object, int size);
 void collision(ParticleObject* object, int size);
 void constraint(ParticleObject* object, int size, mfloat_t* containerPos);
 void clearGrid();
-void fillGrid(VerletObject* objects, int size);
-void applyGridCollisions(VerletObject* objects, int size);
-void addForce(VerletObject* objects, int size, mfloat_t* center, float strength);
+void fillGrid(ParticleObject* objects, int size);
+void applyGridCollisions(ParticleObject* objects, int size);
+void addForce(ParticleObject* objects, int size, mfloat_t* center, float strength);
 
 #endif
