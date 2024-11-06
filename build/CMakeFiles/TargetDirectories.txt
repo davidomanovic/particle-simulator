@@ -1,0 +1,11 @@
+C:/GitHub/Verlet-Particles/build/CMakeFiles/ParticleSimulation.dir
+C:/GitHub/Verlet-Particles/build/CMakeFiles/INSTALL.dir
+C:/GitHub/Verlet-Particles/build/CMakeFiles/ALL_BUILD.dir
+C:/GitHub/Verlet-Particles/build/CMakeFiles/ZERO_CHECK.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/CMakeFiles/uninstall.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/CMakeFiles/INSTALL.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/CMakeFiles/ALL_BUILD.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/src/CMakeFiles/glfw.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/src/CMakeFiles/update_mappings.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/src/CMakeFiles/INSTALL.dir
+C:/GitHub/Verlet-Particles/build/libs/glfw/docs/CMakeFiles/INSTALL.dir

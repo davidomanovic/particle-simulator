@@ -9,15 +9,10 @@ add_subdirectory(libs/glfw)
 
 # Add include directories
 include_directories(include)  # Your local project include directory
-include_directories(libs/glfw/include)  # GLFW's include directory
-
-# Define macros to prevent Windows header conflicts
-add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX -DGLFW_INCLUDE_NONE)
+include_directories(libs/glfw/include/GLFW)  # GLFW's include directory
 
 # Define executable and link libraries
 add_executable(ParticleSimulation src/main.c src/particles.c src/verlet.c)
 
 # Link GLFW and OpenGL
-target_link_libraries(ParticleSimulation glfw)
-target_link_libraries(ParticleSimulation opengl32)  # Link OpenGL on Windows
-endif()
+target_link_libraries(ParticleSimulation glfw opengl32)  # Link OpenGL on Windows

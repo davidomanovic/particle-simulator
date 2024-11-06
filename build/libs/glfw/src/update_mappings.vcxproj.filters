@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\GitHub\Verlet-Particles\build\CMakeFiles\6960911b732a310def14cb5129ba5277\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\GitHub\Verlet-Particles\libs\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\GitHub\Verlet-Particles\libs\glfw\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\GitHub\Verlet-Particles\libs\glfw\CMake\GenerateMappings.cmake" />
+    <None Include="C:\GitHub\Verlet-Particles\build\libs\glfw\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E32FCA69-F72A-336C-8E89-FB9FB76BD58E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{64F9B0A8-9432-3D6E-BA5B-5C2F11493075}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

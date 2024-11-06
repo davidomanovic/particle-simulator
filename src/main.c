@@ -1,16 +1,12 @@
-#define WIN32_LEAN_AND_MEAN // Define only once
-#define NOMINMAX            // Define only once to prevent min/max conflicts
-#define GLFW_INCLUDE_NONE   // Prevent GLFW from including OpenGL headers
-
-#include <Windows.h>
-#include <GL/gl.h>          // Include after Windows.h
-#include <GLFW/glfw3.h>
-
-#include "particles.h"
-
-
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
+
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/gl.h>
+#include "particles.h"
+
+typedef void* (*GLADloadproc)(const char *name); // Add this line if GLADloadproc is not defined.
 
 ParticleObject particles[N_PARTICLES];
 
@@ -29,7 +25,7 @@ int main() {
 
     // Make the window's context current
     glfwMakeContextCurrent(window);
-
+    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     // Initialize particles
     initializeParticles(particles, N_PARTICLES);
 
