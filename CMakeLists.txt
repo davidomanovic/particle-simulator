@@ -15,4 +15,4 @@ include_directories(libs/glfw/include)  # GLFW's include directory
 add_executable(ParticleSimulation src/main.c src/particles.c src/verlet.c)
 
 # Link GLFW and OpenGL
-target_link_libraries(ParticleSimulation glfw opengl32)  # Link OpenGL on Windows
+target_link_libraries(ParticleSimulation glfw)  # Link OpenGL on Windows
