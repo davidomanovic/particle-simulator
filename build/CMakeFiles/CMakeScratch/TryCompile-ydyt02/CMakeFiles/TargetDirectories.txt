@@ -1,0 +1,3 @@
+C:/Users/David/OneDrive/Dokumenter/GitHub/Verlet-Particles/build/CMakeFiles/CMakeScratch/TryCompile-ydyt02/CMakeFiles/cmTC_3f216.dir
+C:/Users/David/OneDrive/Dokumenter/GitHub/Verlet-Particles/build/CMakeFiles/CMakeScratch/TryCompile-ydyt02/CMakeFiles/edit_cache.dir
+C:/Users/David/OneDrive/Dokumenter/GitHub/Verlet-Particles/build/CMakeFiles/CMakeScratch/TryCompile-ydyt02/CMakeFiles/rebuild_cache.dir

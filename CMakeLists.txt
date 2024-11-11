@@ -20,4 +20,3 @@ add_executable(ParticleSimulation src/main.c src/particles.c src/verlet.c)
 # Link GLFW and OpenGL
 target_link_libraries(ParticleSimulation glfw)
 target_link_libraries(ParticleSimulation opengl32)  # Link OpenGL on Windows
-endif()
