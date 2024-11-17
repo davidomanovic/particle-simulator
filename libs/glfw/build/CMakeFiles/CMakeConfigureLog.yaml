@@ -1,0 +1,402 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/mingw64/bin/clang.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+      
+      The C compiler identification is Clang, found in:
+        C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/3.30.2/CompilerIdC/a.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_b7c90/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_b7c90.dir\\build.make CMakeFiles/cmTC_b7c90.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y'
+        Building C object CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj
+        C:\\mingw64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_b7c90.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles\\cmTC_b7c90.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
+        (built by Brecht Sanders) clang version 14.0.4
+        Target: x86_64-w64-windows-gnu
+        Thread model: posix
+        InstalledDir: C:/mingw64/bin
+         (in-process)
+         "C:/mingw64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y -resource-dir C:/mingw64/lib/clang/14.0.4 -dependency-file "CMakeFiles\\\\cmTC_b7c90.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem C:/mingw64/lib/clang/14.0.4/include -internal-isystem C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/include -internal-isystem C:/mingw64/x86_64-w64-mingw32/include -internal-isystem C:/mingw64/include -fdebug-compilation-dir=C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o "CMakeFiles\\\\cmTC_b7c90.dir\\\\CMakeCCompilerABI.c.obj" -x c "C:\\\\Program Files\\\\CMake\\\\share\\\\cmake-3.30\\\\Modules\\\\CMakeCCompilerABI.c"
+        clang -cc1 version 14.0.4 based upon LLVM 14.0.4 default target x86_64-w64-mingw32
+        ignoring nonexistent directory "C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/mingw64/lib/clang/14.0.4/include
+         C:/mingw64/x86_64-w64-mingw32/include
+         C:/mingw64/include
+        End of search list.
+        Linking C executable cmTC_b7c90.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_b7c90.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_b7c90.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_b7c90.dir/objects.a @CMakeFiles\\cmTC_b7c90.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_b7c90.dir/objects.a -Wl,--no-whole-archive -o cmTC_b7c90.exe -Wl,--out-implib,libcmTC_b7c90.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        (built by Brecht Sanders) clang version 14.0.4
+        Target: x86_64-w64-windows-gnu
+        Thread model: posix
+        InstalledDir: C:/mingw64/bin
+         "C:/mingw64/bin/ld" -m i386pep -Bdynamic -o cmTC_b7c90.exe C:/mingw64/x86_64-w64-mingw32/lib/crt2.o C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtbegin.o -LC:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0 -LC:/mingw64/x86_64-w64-mingw32/lib -LC:/mingw64/lib -LC:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib -v --whole-archive "CMakeFiles\\\\cmTC_b7c90.dir/objects.a" --no-whole-archive --out-implib libcmTC_b7c90.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtend.o
+        GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders) 2.38
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/mingw64/lib/clang/14.0.4/include]
+          add: [C:/mingw64/x86_64-w64-mingw32/include]
+          add: [C:/mingw64/include]
+        end of search list found
+        collapse include dir [C:/mingw64/lib/clang/14.0.4/include] ==> [C:/mingw64/lib/clang/14.0.4/include]
+        collapse include dir [C:/mingw64/x86_64-w64-mingw32/include] ==> [C:/mingw64/x86_64-w64-mingw32/include]
+        collapse include dir [C:/mingw64/include] ==> [C:/mingw64/include]
+        implicit include dirs: [C:/mingw64/lib/clang/14.0.4/include;C:/mingw64/x86_64-w64-mingw32/include;C:/mingw64/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y']
+        ignore line: []
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_b7c90/fast]
+        ignore line: [C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_b7c90.dir\\build.make CMakeFiles/cmTC_b7c90.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y']
+        ignore line: [Building C object CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [C:\\mingw64\\bin\\clang.exe   -v -MD -MT CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_b7c90.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles\\cmTC_b7c90.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"]
+        ignore line: [(built by Brecht Sanders) clang version 14.0.4]
+        ignore line: [Target: x86_64-w64-windows-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/mingw64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "C:/mingw64/bin/clang.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -mllvm -treat-scalable-fixed-error-as-warning -debugger-tuning=gdb -v -fcoverage-compilation-dir=C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y -resource-dir C:/mingw64/lib/clang/14.0.4 -dependency-file "CMakeFiles\\\\cmTC_b7c90.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_b7c90.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem C:/mingw64/lib/clang/14.0.4/include -internal-isystem C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/include -internal-isystem C:/mingw64/x86_64-w64-mingw32/include -internal-isystem C:/mingw64/include -fdebug-compilation-dir=C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-gwka8y -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o "CMakeFiles\\\\cmTC_b7c90.dir\\\\CMakeCCompilerABI.c.obj" -x c "C:\\\\Program Files\\\\CMake\\\\share\\\\cmake-3.30\\\\Modules\\\\CMakeCCompilerABI.c"]
+        ignore line: [clang -cc1 version 14.0.4 based upon LLVM 14.0.4 default target x86_64-w64-mingw32]
+        ignore line: [ignoring nonexistent directory "C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/mingw64/lib/clang/14.0.4/include]
+        ignore line: [ C:/mingw64/x86_64-w64-mingw32/include]
+        ignore line: [ C:/mingw64/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_b7c90.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_b7c90.dir\\link.txt --verbose=1]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_b7c90.dir/objects.a]
+        ignore line: [C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_b7c90.dir/objects.a @CMakeFiles\\cmTC_b7c90.dir\\objects1.rsp]
+        ignore line: [C:\\mingw64\\bin\\clang.exe  -v -Wl -v -Wl --whole-archive CMakeFiles\\cmTC_b7c90.dir/objects.a -Wl --no-whole-archive -o cmTC_b7c90.exe -Wl --out-implib libcmTC_b7c90.dll.a -Wl --major-image-version 0 --minor-image-version 0]
+        ignore line: [(built by Brecht Sanders) clang version 14.0.4]
+        ignore line: [Target: x86_64-w64-windows-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/mingw64/bin]
+        link line: [ "C:/mingw64/bin/ld" -m i386pep -Bdynamic -o cmTC_b7c90.exe C:/mingw64/x86_64-w64-mingw32/lib/crt2.o C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtbegin.o -LC:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0 -LC:/mingw64/x86_64-w64-mingw32/lib -LC:/mingw64/lib -LC:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib -v --whole-archive "CMakeFiles\\\\cmTC_b7c90.dir/objects.a" --no-whole-archive --out-implib libcmTC_b7c90.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lkernel32 C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtend.o]
+          arg [C:/mingw64/bin/ld] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-o] ==> ignore
+          arg [cmTC_b7c90.exe] ==> ignore
+          arg [C:/mingw64/x86_64-w64-mingw32/lib/crt2.o] ==> obj [C:/mingw64/x86_64-w64-mingw32/lib/crt2.o]
+          arg [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtbegin.o] ==> obj [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtbegin.o]
+          arg [-LC:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0] ==> dir [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0]
+          arg [-LC:/mingw64/x86_64-w64-mingw32/lib] ==> dir [C:/mingw64/x86_64-w64-mingw32/lib]
+          arg [-LC:/mingw64/lib] ==> dir [C:/mingw64/lib]
+          arg [-LC:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> dir [C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib]
+          arg [-v] ==> ignore
+          arg [--whole-archive] ==> ignore
+          arg [CMakeFiles\\\\cmTC_b7c90.dir/objects.a] ==> ignore
+          arg [--no-whole-archive] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_b7c90.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmoldname] ==> lib [moldname]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmoldname] ==> lib [moldname]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtend.o] ==> obj [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtend.o]
+        linker tool for 'C': C:/mingw64/bin/ld
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        collapse library dir [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0] ==> [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0]
+        collapse library dir [C:/mingw64/x86_64-w64-mingw32/lib] ==> [C:/mingw64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/mingw64/lib] ==> [C:/mingw64/lib]
+        collapse library dir [C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib] ==> [C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib]
+        implicit libs: [mingw32;gcc;moldname;mingwex;advapi32;shell32;user32;kernel32;mingw32;gcc;moldname;mingwex;kernel32]
+        implicit objs: [C:/mingw64/x86_64-w64-mingw32/lib/crt2.o;C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtbegin.o;C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/crtend.o]
+        implicit dirs: [C:/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0;C:/mingw64/x86_64-w64-mingw32/lib;C:/mingw64/lib;C:/mingw64/x86_64-w64-mingw32/sys-root/mingw/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the C compiler's linker: "C:/mingw64/bin/ld" "-v"
+      GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders) 2.38
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-v7sc62"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-v7sc62"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/GitHub/Verlet-Particles/libs/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-v7sc62'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_9492f/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_9492f.dir\\build.make CMakeFiles/cmTC_9492f.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-v7sc62'
+        Building C object CMakeFiles/cmTC_9492f.dir/src.c.obj
+        C:\\mingw64\\bin\\clang.exe -DCMAKE_HAVE_LIBC_PTHREAD   -MD -MT CMakeFiles/cmTC_9492f.dir/src.c.obj -MF CMakeFiles\\cmTC_9492f.dir\\src.c.obj.d -o CMakeFiles\\cmTC_9492f.dir\\src.c.obj -c C:\\GitHub\\Verlet-Particles\\libs\\glfw\\build\\CMakeFiles\\CMakeScratch\\TryCompile-v7sc62\\src.c
+        Linking C executable cmTC_9492f.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_9492f.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_9492f.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_9492f.dir/objects.a @CMakeFiles\\cmTC_9492f.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe -Wl,--whole-archive CMakeFiles\\cmTC_9492f.dir/objects.a -Wl,--no-whole-archive -o cmTC_9492f.exe -Wl,--out-implib,libcmTC_9492f.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_9492f.dir\\linkLibs.rsp
+        C:/mingw64/bin/ld: CMakeFiles\\cmTC_9492f.dir/objects.a(src.c.obj):src.c:(.text+0x2a): undefined reference to `pthread_create'
+        C:/mingw64/bin/ld: CMakeFiles\\cmTC_9492f.dir/objects.a(src.c.obj):src.c:(.text+0x33): undefined reference to `pthread_detach'
+        C:/mingw64/bin/ld: CMakeFiles\\cmTC_9492f.dir/objects.a(src.c.obj):src.c:(.text+0x3c): undefined reference to `pthread_cancel'
+        C:/mingw64/bin/ld: CMakeFiles\\cmTC_9492f.dir/objects.a(src.c.obj):src.c:(.text+0x49): undefined reference to `pthread_join'
+        C:/mingw64/bin/ld: CMakeFiles\\cmTC_9492f.dir/objects.a(src.c.obj):src.c:(.text+0x52): undefined reference to `pthread_exit'
+        clang: error: linker command failed with exit code 1 (use -v to see invocation)
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_9492f.dir\\build.make:101: cmTC_9492f.exe] Error 1
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-v7sc62'
+        mingw32-make: *** [Makefile:126: cmTC_9492f/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-tvum7l"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-tvum7l"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/GitHub/Verlet-Particles/libs/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-tvum7l'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c45fa/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c45fa.dir\\build.make CMakeFiles/cmTC_c45fa.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-tvum7l'
+        Building C object CMakeFiles/cmTC_c45fa.dir/CheckFunctionExists.c.obj
+        C:\\mingw64\\bin\\clang.exe   -DCHECK_FUNCTION_EXISTS=pthread_create -MD -MT CMakeFiles/cmTC_c45fa.dir/CheckFunctionExists.c.obj -MF CMakeFiles\\cmTC_c45fa.dir\\CheckFunctionExists.c.obj.d -o CMakeFiles\\cmTC_c45fa.dir\\CheckFunctionExists.c.obj -c C:\\GitHub\\Verlet-Particles\\libs\\glfw\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tvum7l\\CheckFunctionExists.c
+        Linking C executable cmTC_c45fa.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_c45fa.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_c45fa.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_c45fa.dir/objects.a @CMakeFiles\\cmTC_c45fa.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe  -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,--whole-archive CMakeFiles\\cmTC_c45fa.dir/objects.a -Wl,--no-whole-archive -o cmTC_c45fa.exe -Wl,--out-implib,libcmTC_c45fa.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_c45fa.dir\\linkLibs.rsp
+        C:/mingw64/bin/ld: cannot find -lpthreads: No such file or directory
+        clang: error: linker command failed with exit code 1 (use -v to see invocation)
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_c45fa.dir\\build.make:101: cmTC_c45fa.exe] Error 1
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-tvum7l'
+        mingw32-make: *** [Makefile:126: cmTC_c45fa/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-vj3ovx"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-vj3ovx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/GitHub/Verlet-Particles/libs/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-vj3ovx'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c0e82/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c0e82.dir\\build.make CMakeFiles/cmTC_c0e82.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-vj3ovx'
+        Building C object CMakeFiles/cmTC_c0e82.dir/CheckFunctionExists.c.obj
+        C:\\mingw64\\bin\\clang.exe   -DCHECK_FUNCTION_EXISTS=pthread_create -MD -MT CMakeFiles/cmTC_c0e82.dir/CheckFunctionExists.c.obj -MF CMakeFiles\\cmTC_c0e82.dir\\CheckFunctionExists.c.obj.d -o CMakeFiles\\cmTC_c0e82.dir\\CheckFunctionExists.c.obj -c C:\\GitHub\\Verlet-Particles\\libs\\glfw\\build\\CMakeFiles\\CMakeScratch\\TryCompile-vj3ovx\\CheckFunctionExists.c
+        Linking C executable cmTC_c0e82.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_c0e82.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_c0e82.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_c0e82.dir/objects.a @CMakeFiles\\cmTC_c0e82.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe  -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,--whole-archive CMakeFiles\\cmTC_c0e82.dir/objects.a -Wl,--no-whole-archive -o cmTC_c0e82.exe -Wl,--out-implib,libcmTC_c0e82.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_c0e82.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-vj3ovx'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "src/CMakeLists.txt:274 (check_include_file)"
+    checks:
+      - "Looking for dinput.h"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-am0l8b"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-am0l8b"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/GitHub/Verlet-Particles/libs/glfw/CMake/modules"
+    buildResult:
+      variable: "DINPUT_H_FOUND"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-am0l8b'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_d881c/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_d881c.dir\\build.make CMakeFiles/cmTC_d881c.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-am0l8b'
+        Building C object CMakeFiles/cmTC_d881c.dir/CheckIncludeFile.c.obj
+        C:\\mingw64\\bin\\clang.exe    -MD -MT CMakeFiles/cmTC_d881c.dir/CheckIncludeFile.c.obj -MF CMakeFiles\\cmTC_d881c.dir\\CheckIncludeFile.c.obj.d -o CMakeFiles\\cmTC_d881c.dir\\CheckIncludeFile.c.obj -c C:\\GitHub\\Verlet-Particles\\libs\\glfw\\build\\CMakeFiles\\CMakeScratch\\TryCompile-am0l8b\\CheckIncludeFile.c
+        Linking C executable cmTC_d881c.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_d881c.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_d881c.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_d881c.dir/objects.a @CMakeFiles\\cmTC_d881c.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe -Wl,--whole-archive CMakeFiles\\cmTC_d881c.dir/objects.a -Wl,--no-whole-archive -o cmTC_d881c.exe -Wl,--out-implib,libcmTC_d881c.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_d881c.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-am0l8b'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "src/CMakeLists.txt:275 (check_include_file)"
+    checks:
+      - "Looking for xinput.h"
+    directories:
+      source: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-j8ysr9"
+      binary: "C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-j8ysr9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/GitHub/Verlet-Particles/libs/glfw/CMake/modules"
+    buildResult:
+      variable: "XINPUT_H_FOUND"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-j8ysr9'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_8c7b6/fast
+        C:/msys64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_8c7b6.dir\\build.make CMakeFiles/cmTC_8c7b6.dir/build
+        mingw32-make[1]: Entering directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-j8ysr9'
+        Building C object CMakeFiles/cmTC_8c7b6.dir/CheckIncludeFile.c.obj
+        C:\\mingw64\\bin\\clang.exe    -MD -MT CMakeFiles/cmTC_8c7b6.dir/CheckIncludeFile.c.obj -MF CMakeFiles\\cmTC_8c7b6.dir\\CheckIncludeFile.c.obj.d -o CMakeFiles\\cmTC_8c7b6.dir\\CheckIncludeFile.c.obj -c C:\\GitHub\\Verlet-Particles\\libs\\glfw\\build\\CMakeFiles\\CMakeScratch\\TryCompile-j8ysr9\\CheckIncludeFile.c
+        Linking C executable cmTC_8c7b6.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_8c7b6.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_8c7b6.dir/objects.a
+        C:\\mingw64\\bin\\llvm-ar.exe qc CMakeFiles\\cmTC_8c7b6.dir/objects.a @CMakeFiles\\cmTC_8c7b6.dir\\objects1.rsp
+        C:\\mingw64\\bin\\clang.exe -Wl,--whole-archive CMakeFiles\\cmTC_8c7b6.dir/objects.a -Wl,--no-whole-archive -o cmTC_8c7b6.exe -Wl,--out-implib,libcmTC_8c7b6.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_8c7b6.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/GitHub/Verlet-Particles/libs/glfw/build/CMakeFiles/CMakeScratch/TryCompile-j8ysr9'
+        
+      exitCode: 0
+...
