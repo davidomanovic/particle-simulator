@@ -6,5 +6,7 @@
 
 void apply_force(Particle* p, float fx, float fy);
 void integrate(Particle* p, float dt);
+int check_collision(const Particle* p1, const Particle* p2);
+void collision_force(Particle* p1, Particle* p2);
 
 #endif // MOVEMENT_H

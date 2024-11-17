@@ -6,6 +6,8 @@ typedef struct {
     float x, y;    // Position
     float vx, vy;  // Velocity
     float ax, ay;  // Acceleration
+    float r, g, b; // Color of particle
+    float radius;     // Radius of the particle
     float mass;
 } Particle;
 
