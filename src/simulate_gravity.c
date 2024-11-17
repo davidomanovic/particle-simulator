@@ -9,14 +9,12 @@
 void simulate_gravity() {
     if (!glfwInit()) {
         fprintf(stderr, "Failed to initialize GLFW\n");
-        return;
     }
 
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Verlet Particles", NULL, NULL);
     if (!window) {
         fprintf(stderr, "Failed to create GLFW window\n");
         glfwTerminate();
-        return;
     }
 
     glfwMakeContextCurrent(window);

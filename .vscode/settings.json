@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "movement.h": "c",
-        "glfw3.h": "c"
-    }
+        "glfw3.h": "c",
+        "draw_particle.h": "c"
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }
