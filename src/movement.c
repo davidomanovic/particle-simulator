@@ -31,15 +31,50 @@ void collision_force(Particle* p1, Particle* p2) {
     float dy = p1->y - p2->y;
     float distance = sqrt(dx * dx + dy * dy);
 
-    if (distance == 0.0f) return; // Prevent division by zero or overlapping at the same position
+    if (distance == 0.0f) return; // Prevent division by zero or particles being at the same position
 
     // Check if particles are colliding
     float overlap = (p1->radius + p2->radius) - distance;
     if (overlap > 0) {
-        p1->vx = ((p1->mass - p2->mass)/(p1->mass +  p2->mass)) * p1->vx + (2*p2->mass)/(p1->mass+p2->mass) * p2->vx;
-        p2->vx =  ((2*p1->mass)/(p1->mass + p2->mass)) * p1-> vx + (p2->mass - p1->mass)/(p1->mass+p2->mass) * p2->vx;
-        p1->vy = ((p1->mass - p2->mass)/(p1->mass +  p2->mass)) * p1->vy + (2*p2->mass)/(p1->mass+p2->mass) * p2->vy;
-        p2->vy =  ((2*p1->mass)/(p1->mass + p2->mass)) * p1-> vy + (p2->mass - p1->mass)/(p1->mass+p2->mass) * p2->vy;
+        // Normalize the collision vector
+        float nx = dx / distance;
+        float ny = dy / distance;
+
+        // Resolve overlap by moving particles apart proportionally to their masses
+        float p1_factor = p2->mass / (p1->mass + p2->mass);
+        float p2_factor = p1->mass / (p1->mass + p2->mass);
+
+        p1->x += nx * overlap * p1_factor;
+        p1->y += ny * overlap * p1_factor;
+
+        p2->x -= nx * overlap * p2_factor;
+        p2->y -= ny * overlap * p2_factor;
+
+        // Relative velocity
+        float rvx = p2->vx - p1->vx;
+        float rvy = p2->vy - p1->vy;
+
+        // Relative velocity along the normal
+        float velocity_along_normal = rvx * nx + rvy * ny;
+
+        // If particles are separating, skip velocity adjustment
+        if (velocity_along_normal > 0) return;
+
+        // Calculate impulse scalar
+        float restitution = 1.0f; // Perfectly elastic collision
+        float impulse = -(1.0f + restitution) * velocity_along_normal;
+        impulse /= (1.0f / p1->mass + 1.0f / p2->mass);
+
+        // Apply impulse to velocities
+        float impulse_x = impulse * nx;
+        float impulse_y = impulse * ny;
+
+        p1->vx -= impulse_x / p1->mass;
+        p1->vy -= impulse_y / p1->mass;
+
+        p2->vx += impulse_x / p2->mass;
+        p2->vy += impulse_y / p2->mass;
     }
 }
+
 

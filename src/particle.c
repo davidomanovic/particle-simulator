@@ -16,9 +16,9 @@ Particle* create_particle(float x, float y, float mass, float radius) {
         p->mass = mass;
 
         // Assign random colors
-        p->r = (float)rand() / RAND_MAX; // Random red
-        p->g = (float)rand() / RAND_MAX; // Random green
-        p->b = (float)rand() / RAND_MAX; // Random blue
+        p->r = 255; // Random red
+        p->g = 0; // Random green
+        p->b = 0; // Random blue
     }
     return p;
 }

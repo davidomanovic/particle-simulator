@@ -25,8 +25,8 @@ void initialize_particles() {
     for (int i = 0; i < NUM_PARTICLES; i++) {
         float x = PARTICLE_RADIUS + (rand() % (WIDTH - (int)(2 * PARTICLE_RADIUS)));
         float y = PARTICLE_RADIUS + (rand() % (HEIGHT - (int)(2 * PARTICLE_RADIUS)));
-        float vx = (rand() % 200 - 100) / 10.0f; // Random velocity in range [-10, 10]
-        float vy = (rand() % 200 - 100) / 10.0f;
+        float vx = (rand() % 200); // Random velocity in range [-10, 10]
+        float vy = (rand() % 200);
 
         particles[i] = create_particle(x, y, 1.0f, 10.0f); // Create particle with mass 1.0
         particles[i]->vx = vx;
