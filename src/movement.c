@@ -25,18 +25,19 @@ int check_collision(const Particle* p1, const Particle* p2) {
     return distance < min_distance;
 }
 
-
 void collision_force(Particle* p1, Particle* p2) {
+    // Calculate the vector between the particles
     float dx = p1->x - p2->x;
     float dy = p1->y - p2->y;
     float distance = sqrt(dx * dx + dy * dy);
 
-    if (distance == 0.0f) return; // Prevent division by zero
+    if (distance == 0.0f) return; // Prevent division by zero or overlapping at the same position
 
-    // Overlap resolution: Move particles apart
+    // Check if particles are colliding
     float overlap = (p1->radius + p2->radius) - distance;
     if (overlap > 0) {
-        p1->vx -= p1->vx - (p2->mass/p1->mass) * (p1->vx);
-        p2->vx -= p2->vx - (p1->mass/p2->mass) * (p2->vx);
+        p1->vx -= p2->mass/p1->mass * p1->vx;
+        p2->vx -= p1->mass/p2->mass * p2->vx;
     }
 }
+
