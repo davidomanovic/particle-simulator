@@ -1,4 +1,4 @@
-name: Makefile CI
+name: C/C++ CI
 
 on:
   push:
@@ -21,10 +21,11 @@ jobs:
         sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev
 
     - name: Build project
-      run: make -C src
+      run: |
+        cd src
+        make
 
-    - name: Run test create particle
-      run: make -C tests test_create_particle
-
-    - name: Run test movement
-      run: make -C tests test_movement
+    - name: Run tests (optional)
+      run: |
+        cd src
+        make check
