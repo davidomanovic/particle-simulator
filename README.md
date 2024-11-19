@@ -2,7 +2,7 @@
 
 This project implements Verlet integration to simulate particle physics in C, with GLFW for real-time visualization. You can directly run the `verlet_simulator.exe` inside `/bin`. It demonstrates a simple yet efficient way to model particle movement, particularly in cases where forces like gravity, springs, and collisions act on particles over time. The purpose of this project is to be very simple and readable.
 
-![Demo](assets/gravity_gif.gif)
+![Demo](assets/gas_simulation.gif)
 
 
 ## Table of Contents
