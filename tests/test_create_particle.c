@@ -10,7 +10,7 @@ void tearDown(void) {
 }
 
 void test_create_particle(void) {
-    Particle* p = create_particle(10.0f, 20.0f, 1.0f);
+    Particle* p = create_particle(10.0f, 20.0f, 1.0f, 1.0f);
     TEST_ASSERT_NOT_NULL(p);
     TEST_ASSERT_EQUAL_FLOAT(10.0f, p->x);
     TEST_ASSERT_EQUAL_FLOAT(20.0f, p->y);
@@ -19,7 +19,7 @@ void test_create_particle(void) {
 }
 
 void test_particle_motion(void) {
-    Particle* p = create_particle(10.0f, 20.0f, 1.0f);
+    Particle* p = create_particle(10.0f, 20.0f, 1.0f, 1.0f);
     p->vx = 5.0f;
     p->vy = 0.0f;
 
