@@ -36,6 +36,11 @@ $(BIN_DIR)/%: $(SCRIPT_DIR)/%.c $(CORE_OBJ)
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $< $(CORE_OBJ) $(LDFLAGS)
 
+# Check target for running tests
+check: all
+	@echo "Running tests..."
+	@$(BIN_DIR)/simulate_impulse --test || echo "Tests failed"
+
 # Clean up
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
