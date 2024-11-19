@@ -18,10 +18,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev
+        sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev xvfb
+
+    - name: Start Xvfb
+      run: |
+        Xvfb :99 -screen 0 1024x768x16 &
+        export DISPLAY=:99
 
     - name: Build project
       run: make
 
-    - name: Run check
+    - name: Run tests
       run: make check
