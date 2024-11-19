@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -std=c99 -O2 -I../include -I../libs/glfw/include
 LDFLAGS = -L../libs/glfw/src -lglfw3 -lopengl32 -lgdi32
 
 # Source and Target
-SRC = main.c particle.c movement.c simulate_gravity.c draw_particle.c
+SRC = main.c particle.c movement.c simulate_impulse.c draw_particle.c
 OBJ_DIR = ../bin/obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 TARGET = ../bin/verlet_simulator

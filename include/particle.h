@@ -13,7 +13,7 @@ typedef struct {
 } Particle;
 
 // Particle functions
-Particle* create_particle(float x, float y, float mass);
+Particle* create_particle(float x, float y, float mass, float radius);
 void destroy_particle(Particle* p);
 
 #endif // PARTICLE_H

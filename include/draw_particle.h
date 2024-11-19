@@ -5,6 +5,6 @@
 #include <particle.h>
 #include <math.h>
 
-void draw_particle(const Particle* p, float radius, float r, float g, float b);
+void draw_particle(const Particle* p);
 
 #endif

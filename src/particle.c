@@ -1,12 +1,15 @@
 // particle.c
+#define _USE_MATH_DEFINES
 #include <particle.h>
+#include <math.h>
 #include <stdlib.h>
 
-Particle* create_particle(float x, float y, float mass) {
+Particle* create_particle(float x, float y, float mass, float radius) {
     Particle* p = (Particle*)malloc(sizeof(Particle));
     if (p) {
         p->x = x; p->y = y;
         p->vx = p->vy = p->ax = p->ay = 0.0f;
+        p->radius = radius;
         p->mass = mass;
 
         // Assign random colors

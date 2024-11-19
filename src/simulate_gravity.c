@@ -57,7 +57,7 @@ void simulate_gravity() {
             // Handle collisions with other particles
             for (int j = i + 1; j < NUM_PARTICLES; j++) {
                 if (check_collision(particles[i], particles[j])) {
-                    collision_force(particles[i], particles[j]);
+                    collision_force(particles[i], particles[j], 1.0f);
                 }
             }
 
