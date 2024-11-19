@@ -12,6 +12,7 @@ endif
 # Source and Object Files
 SRC = main.c particle.c movement.c simulate_impulse.c draw_particle.c
 OBJ_DIR = ../bin/obj
+TEST_DIR = ../tests
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 TARGET = ../bin/verlet_simulator
 

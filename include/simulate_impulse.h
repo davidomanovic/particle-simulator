@@ -9,6 +9,6 @@
 #include <stdio.h>
 #include <draw_particle.h>
 
-void simulate_impulse(Particle** particles, int num_particles); 
+void simulate_impulse(); 
 
 #endif // simulate_impulse.h

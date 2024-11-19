@@ -22,7 +22,7 @@ void draw_particle(const Particle* p) {
     // Draw a circle using a triangle fan
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(px, py); // Center of the circle
-    int num_segments = 36; // Number of segments to approximate the circle
+    int num_segments = 100; // Number of segments to approximate the circle
     for (int i = 0; i <= num_segments; i++) {
         float angle = 2.0f * M_PI * i / num_segments; // Angle for this segment
         float x = px + cos(angle) * scaled_radius;    // X coordinate

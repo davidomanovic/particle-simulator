@@ -24,6 +24,8 @@ jobs:
       working-directory: src
       run: make
 
-    - name: Run tests (optional)
+    - name: Run check
       working-directory: src
       run: make check
+
+      

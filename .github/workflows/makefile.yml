@@ -29,3 +29,4 @@ jobs:
       run: |
         cd src
         make check
+      
