@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Install dependencies
@@ -23,3 +23,9 @@ jobs:
     - name: Build project
       working-directory: src
       run: make
+
+    - name: Make binary executable
+      run: chmod +x bin/verlet_simulator
+
+    - name: Run executable (optional)
+      run: ./bin/verlet_simulator
