@@ -1,14 +1,7 @@
 # Compiler and Flags
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -O2 -I../include -I../libs/glfw/include
-
-# Make it possible swithc between linux and windows
-ifeq ($(OS),Windows_NT)
-  LDFLAGS = -L../libs/glfw/src -lglfw3 -lopengl32 -lgdi32
-else
-  LDFLAGS = -lglfw -lGL -lX11 -lpthread -lm
-endif
-
+LDFLAGS = -lglfw -lGL -lX11 -lpthread -lm
 
 # Source and Object Files
 SRC = main.c particle.c movement.c simulate_impulse.c draw_particle.c
@@ -30,6 +23,10 @@ $(TARGET): $(OBJ)
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+check:
+	@echo "Running tests..."
+	@echo "No tests defined. Skipping."
 
 clean:
 	rm -rf $(OBJ_DIR) ../bin/verlet_simulator
