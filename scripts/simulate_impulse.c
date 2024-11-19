@@ -101,3 +101,9 @@ void simulate_impulse() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+int main() {
+    // Your simulation logic here
+    simulate_impulse();
+    return 0;
+}
