@@ -30,5 +30,8 @@ $(TARGET): $(OBJ)
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+check:
+	@echo "No tests defined. Skipping."
+
 clean:
 	rm -rf $(OBJ_DIR) ../bin/verlet_simulator
