@@ -12,16 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-
-    - name: configure
-      run: ./configure
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: make
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev
 
-    - name: Run check
-      run: make check
+    - name: Build project
+      run: make -C src
 
-    - name: Run distcheck
-      run: make distcheck
+    - name: Run test create particle
+      run: make -C tests test_create_particle
+
+    - name: Run test movement
+      run: make -C tests test_movement
