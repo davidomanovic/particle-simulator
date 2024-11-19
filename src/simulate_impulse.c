@@ -39,7 +39,7 @@ void simulate_impulse(Particle** particles, int num_particles) {
         for (int i = 0; i < num_particles; i++) {
             for (int j = i + 1; j < num_particles; j++) {
                 if (check_collision(particles[i], particles[j])) {
-                    collision_force(particles[i], particles[j], 1.0f);
+                    collision_force(particles[i], particles[j]);
                 }
             }
         }

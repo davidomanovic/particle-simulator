@@ -26,7 +26,7 @@ int check_collision(const Particle* p1, const Particle* p2) {
 }
 
 
-void collision_force(Particle* p1, Particle* p2, float restitution) {
+void collision_force(Particle* p1, Particle* p2) {
     float dx = p1->x - p2->x;
     float dy = p1->y - p2->y;
     float distance = sqrt(dx * dx + dy * dy);
