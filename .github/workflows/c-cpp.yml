@@ -21,9 +21,9 @@ jobs:
         sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev
 
     - name: Build project
-      working-directory: src/2D
+      working-directory: src
       run: make
 
     - name: Run tests (optional)
-      working-directory: src/2D
+      working-directory: src
       run: make check

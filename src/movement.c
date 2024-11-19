@@ -36,8 +36,8 @@ void collision_force(Particle* p1, Particle* p2) {
     // Check if particles are colliding
     float overlap = (p1->radius + p2->radius) - distance;
     if (overlap > 0) {
-        p1->vx -= p2->mass/p1->mass * p1->vx * 0.1;
-        p2->vx -= p1->mass/p2->mass * p2->vx * 0.1;
+        p1->vx -= p2->mass/p1->mass * p1->vx;
+        p2->vx -= p1->mass/p2->mass * p2->vx;
     }
 }
 
