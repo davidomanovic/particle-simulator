@@ -1,7 +1,14 @@
 # Compiler and Flags
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -O2 -I../include -I../libs/glfw/include
-LDFLAGS = -lglfw -lGL -lX11 -lpthread -lm
+
+# Make it possible swithc between linux and windows
+ifeq ($(OS),Windows_NT)
+  LDFLAGS = -L../libs/glfw/src -lglfw3 -lopengl32 -lgdi32
+else
+  LDFLAGS = -lglfw -lGL -lX11 -lpthread -lm
+endif
+
 
 # Source and Object Files
 SRC = main.c particle.c movement.c simulate_impulse.c draw_particle.c
