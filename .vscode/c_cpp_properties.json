@@ -3,8 +3,7 @@
       {
         "name": "Win32",
         "includePath": [
-          "${workspaceFolder}/**",
-          "$C:/Users/David/OneDrive/Dokumenter/GitHub/Verlet-Particles/libs/glfw/libs/glfw/include"
+          "${workspaceFolder}/**"
         ],
         "defines": [
           "_DEBUG",
