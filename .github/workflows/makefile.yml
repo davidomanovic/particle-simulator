@@ -22,10 +22,10 @@ jobs:
 
     - name: Build project
       run: |
-        cd src
+        cd src/2D
         make
 
     - name: Run tests (optional)
       run: |
-        cd src
+        cd src/2D
         make check
