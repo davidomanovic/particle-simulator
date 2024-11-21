@@ -1,10 +1,11 @@
 # Particle Simulator
-
-This project implements Verlet integration to simulate particle physics in C, using GLFW for real-time visualization. You can directly run the `verlet_simulator` or other scripts (e.g., `simulate_impulse`, `simulate_potential`) inside `/bin`. The goal is to provide simple and visual simulations of particle physics. Currently implemented examples include gravity simulation, collision response, impulse dynamics, gas in a box, and particles in a potential field. Work on 3D simulations is in progress! 😄
-
 <div align="center">
   <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2Nzd2xwZ2t2NXAzbDY3enhqeXFlaTcxNjJxNjBwZTM5MTR5cWlreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Xst5ivWBE0FqX8d44I/giphy.gif" width="600" height="400" />
 </div>
+
+
+This project implements Verlet integration to simulate particle physics in C, using GLFW for real-time visualization. You can directly run the `verlet_simulator` or other scripts (e.g., `simulate_impulse`, `simulate_potential`) inside `/bin`. The goal is to provide simple and visual simulations of particle physics. Currently implemented examples include gravity simulation, collision response, impulse dynamics, gas in a box, and particles in a potential field. Work on 3D simulations is in progress! 😄
+
 ---
 
 ## Table of Contents
