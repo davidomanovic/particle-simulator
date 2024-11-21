@@ -18,7 +18,7 @@ void integrate(Particle* p, float dt) {
 int check_collision(const Particle* p1, const Particle* p2) {
     float dx = p1->x - p2->x;
     float dy = p1->y - p2->y;
-    float distance = sqrt(dx * dx + dy * dy);
+    float distance = sqrtf(dx * dx + dy * dy);
     float min_distance = (p1->radius + p2->radius);
 
     // Add a small tolerance to prevent re-triggering
@@ -26,28 +26,26 @@ int check_collision(const Particle* p1, const Particle* p2) {
 }
 
 void collision_force(Particle* p1, Particle* p2) {
-    float dx = p1->x - p2->x;
-    float dy = p1->y - p2->y;
-    float distance = sqrt(dx * dx + dy * dy);
+    float dx = p2->x - p1->x;
+    float dy = p2->y - p1->y;
+    float distance = sqrtf(dx * dx + dy * dy);
+    float min_distance = p1->radius + p2->radius;
 
     if (distance == 0.0f) return; // Prevent division by zero
 
-    float min_distance = p1->radius + p2->radius;
     if (distance < min_distance) {
-        // Overlap resolution: separate particles
-        float overlap = min_distance - distance;
+        // Normalize the displacement vector
         float nx = dx / distance;
         float ny = dy / distance;
 
-        // Move particles proportional to their masses
-        float p1_factor = p2->mass / (p1->mass + p2->mass);
-        float p2_factor = p1->mass / (p1->mass + p2->mass);
+        // Calculate overlap
+        float overlap = 0.5f * (min_distance - distance);
 
-        p1->x += nx * overlap * p1_factor;
-        p1->y += ny * overlap * p1_factor;
-
-        p2->x -= nx * overlap * p2_factor;
-        p2->y -= ny * overlap * p2_factor;
+        // Displace particles so they're no longer overlapping
+        p1->x -= nx * overlap;
+        p1->y -= ny * overlap;
+        p2->x += nx * overlap;
+        p2->y += ny * overlap;
 
         // Relative velocity
         float rvx = p2->vx - p1->vx;
@@ -59,21 +57,20 @@ void collision_force(Particle* p1, Particle* p2) {
         // Do not resolve if particles are separating
         if (velocity_along_normal > 0) return;
 
-        // Calculate impulse scalar
+        // Calculate restitution
         float restitution = 1.0f; // Perfectly elastic collision
+
+        // Calculate impulse scalar
         float impulse = -(1 + restitution) * velocity_along_normal;
         impulse /= (1 / p1->mass) + (1 / p2->mass);
 
         // Apply impulse
-        float impulse_x = impulse * nx;
-        float impulse_y = impulse * ny;
+        float impulse_per_mass1 = impulse / p1->mass;
+        float impulse_per_mass2 = impulse / p2->mass;
 
-        p1->vx -= impulse_x / p1->mass;
-        p1->vy -= impulse_y / p1->mass;
-
-        p2->vx += impulse_x / p2->mass;
-        p2->vy += impulse_y / p2->mass;
+        p1->vx -= nx * impulse_per_mass1;
+        p1->vy -= ny * impulse_per_mass1;
+        p2->vx += nx * impulse_per_mass2;
+        p2->vy += ny * impulse_per_mass2;
     }
 }
-
-

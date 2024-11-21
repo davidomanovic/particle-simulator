@@ -9,10 +9,10 @@
 #include <gas_simulation.h>
 #include <time.h>
 
-#define WIDTH 1920
-#define HEIGHT 1080
-#define NUM_PARTICLES 500
-#define PARTICLE_RADIUS 5.0f
+#define WIDTH 1000
+#define HEIGHT 1000
+#define NUM_PARTICLES 300
+#define PARTICLE_RADIUS 10.0f
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE 0x809D // Ensure this constant is defined
@@ -48,7 +48,7 @@ void initialize_particles() {
 
         // Generate random angle and speed
         float angle = ((float)rand() / RAND_MAX) * 2.0f * M_PI;
-        float speed = ((float)rand() / RAND_MAX) * 300.0f; // Adjust max speed as needed
+        float speed = 100.0f + ((float)rand() / RAND_MAX) * 100.0f; // Speed between 50 and 100
 
         // Calculate velocity components
         float vx = speed * cosf(angle);
@@ -60,9 +60,9 @@ void initialize_particles() {
         particles[i]->radius = PARTICLE_RADIUS;
 
         // Set random color for visualization
-        particles[i]->r = 0;
+        particles[i]->r = 255;
         particles[i]->g = 0;
-        particles[i]->b = 255;
+        particles[i]->b = 0;
     }
 }
 
