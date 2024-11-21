@@ -15,10 +15,10 @@ Particle* create_particle(float x, float y, float mass, float radius) {
         p->radius = radius;
         p->mass = mass;
 
-        // Assign random colors
-        p->r = 255; // Random red
-        p->g = 0; // Random green
-        p->b = 0; // Random blue
+        // Assign
+        p->r = 0; 
+        p->g = 0;
+        p->b = 255;
     }
     return p;
 }

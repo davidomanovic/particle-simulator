@@ -26,21 +26,20 @@ int check_collision(const Particle* p1, const Particle* p2) {
 }
 
 void collision_force(Particle* p1, Particle* p2) {
-    // Calculate the vector between the particles
     float dx = p1->x - p2->x;
     float dy = p1->y - p2->y;
     float distance = sqrt(dx * dx + dy * dy);
 
-    if (distance == 0.0f) return; // Prevent division by zero or particles being at the same position
+    if (distance == 0.0f) return; // Prevent division by zero
 
-    // Check if particles are colliding
-    float overlap = (p1->radius + p2->radius) - distance;
-    if (overlap > 0) {
-        // Normalize the collision vector
+    float min_distance = p1->radius + p2->radius;
+    if (distance < min_distance) {
+        // Overlap resolution: separate particles
+        float overlap = min_distance - distance;
         float nx = dx / distance;
         float ny = dy / distance;
 
-        // Resolve overlap by moving particles apart proportionally to their masses
+        // Move particles proportional to their masses
         float p1_factor = p2->mass / (p1->mass + p2->mass);
         float p2_factor = p1->mass / (p1->mass + p2->mass);
 
@@ -57,15 +56,15 @@ void collision_force(Particle* p1, Particle* p2) {
         // Relative velocity along the normal
         float velocity_along_normal = rvx * nx + rvy * ny;
 
-        // If particles are separating, skip velocity adjustment
+        // Do not resolve if particles are separating
         if (velocity_along_normal > 0) return;
 
         // Calculate impulse scalar
         float restitution = 1.0f; // Perfectly elastic collision
-        float impulse = -(1.0f + restitution) * velocity_along_normal;
-        impulse /= (1.0f / p1->mass + 1.0f / p2->mass);
+        float impulse = -(1 + restitution) * velocity_along_normal;
+        impulse /= (1 / p1->mass) + (1 / p2->mass);
 
-        // Apply impulse to velocities
+        // Apply impulse
         float impulse_x = impulse * nx;
         float impulse_y = impulse * ny;
 
