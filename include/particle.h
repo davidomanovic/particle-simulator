@@ -14,6 +14,7 @@ typedef struct {
 
 // Particle functions
 Particle* create_particle(float x, float y, float mass, float radius);
+void initialize_particles(Particle*** particles, int num_particles, int radius, int width, int height); 
 void destroy_particle(Particle* p);
 
 #endif // PARTICLE_H

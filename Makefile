@@ -4,9 +4,9 @@ CFLAGS = -Wall -Wextra -std=c99 -O2 -Iinclude -Ilibs/glfw/include
 
 # Platform-specific libraries
 ifeq ($(OS),Windows_NT)
-    LDFLAGS = -Llibs/glfw/src -lglfw3 -lopengl32 -lgdi32
+    LDFLAGS = -Llibs/glfw/src -lglfw3 -lopengl32 -lgdi32 
 else
-    LDFLAGS = -lglfw -lGL -lX11 -lpthread -lm
+    LDFLAGS = -Llibs/FreeGLUT/lib -lglfw -lGL -lX11 -lpthread -lm -lfreeglut
 endif
 
 # Directories
@@ -16,11 +16,11 @@ OBJ_DIR = bin/obj
 BIN_DIR = bin
 
 # Source and Object Files
-CORE_SRC = $(wildcard $(SRC_DIR)/*.c) # Exclude main.c manually if necessary
-CORE_OBJ = $(filter-out $(OBJ_DIR)/main.o, $(CORE_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o))
+CORE_SRC = $(wildcard $(SRC_DIR)/*.c)
+CORE_OBJ = $(CORE_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Scripts (entry points)
-SCRIPTS = simulate_impulse gas_simulation
+SCRIPTS = gas_simulation
 SCRIPT_BINS = $(SCRIPTS:%=$(BIN_DIR)/%)
 
 # Default Target

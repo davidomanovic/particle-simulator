@@ -74,3 +74,37 @@ void collision_force(Particle* p1, Particle* p2) {
         p2->vy += ny * impulse_per_mass2;
     }
 }
+
+// Handle collisions with walls
+void handle_wall_collision(Particle* p, int width, int height) {
+    float restitution = 1.0f; // Perfectly elastic collision with wall
+
+    if (p->x - p->radius < 0) { // Left wall
+        p->x = p->radius;
+        p->vx = -p->vx * restitution;
+    }
+    if (p->x + p->radius > width) { // Right wall
+        p->x = width - p->radius;
+        p->vx = -p->vx * restitution;
+    }
+    if (p->y - p->radius < 0) { // Bottom wall
+        p->y = p->radius;
+        p->vy = -p->vy * restitution;
+    }
+    if (p->y + p->radius > height) { // Top wall
+        p->y = height - p->radius;
+        p->vy = -p->vy * restitution;
+    }
+}
+
+int is_overlapping(Particle** particles, float x, float y, int index, int radius) {
+    for (int i = 0; i < index; i++) {
+        float dx = x - particles[i]->x;
+        float dy = y - particles[i]->y;
+        float distance = sqrtf(dx * dx + dy * dy);
+        if (distance < 2 * radius) {
+            return 1; // Overlaps with existing particle
+        }
+    }
+    return 0; // No overlap
+}
