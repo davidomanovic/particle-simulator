@@ -1,6 +1,6 @@
 # Particle Simulator
 <div align="center">
-  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2Nzd2xwZ2t2NXAzbDY3enhqeXFlaTcxNjJxNjBwZTM5MTR5cWlreiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Xst5ivWBE0FqX8d44I/giphy.gif" width="600" height="300" />
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXo1dDI1c2VrcGl2bm1zeHllZHJsNXBvdWRwaHM0aDhmc3VhNTJoayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/x13EuumwsHLCkm9cyr/giphy.gif" width="450" height="250" />
 </div>
 
 
