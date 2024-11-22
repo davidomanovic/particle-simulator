@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c99 -O2 -Iinclude -Ilibs/glfw/include
 ifeq ($(OS),Windows_NT)
     LDFLAGS = -Llibs/glfw/src -lglfw3 -lopengl32 -lgdi32 
 else
-    LDFLAGS = -Llibs/FreeGLUT/lib -lglfw -lGL -lX11 -lpthread -lm -lfreeglut
+    LDFLAGS = -Llibs/FreeGLUT/lib -lglfw -lGL -lX11 -lpthread -lm
 endif
 
 # Directories
