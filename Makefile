@@ -1,6 +1,6 @@
 # Compiler and Flags
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99 -O2 -Iinclude -Ilibs/glfw/include
+CFLAGS = -Wall -Wextra -std=c99 -O2 -Iinclude -Ilibs/glfw/include -Wno-missing-braces -Wno-unused-function -Wno-unused-parameter -Wno-stringop-truncation
 
 # Platform-specific libraries
 ifeq ($(OS),Windows_NT)
