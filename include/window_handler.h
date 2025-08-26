@@ -1,60 +1,55 @@
-#ifndef WINDOW_HANDLER_H
-#define WINDOW_HANDLER_H
-
-#include <GLFW/glfw3.h>
+#pragma once
 #include <stdbool.h>
-#include "stb_easy_font.h"
-#include "particle.h"
+#include <GLFW/glfw3.h>
 
-// Window dimensions
 #define WIDTH 1000
 #define HEIGHT 1000
-#define MAX_INPUT_LENGTH 16
+#define MAX_PARTICLES 1000
+#define MAX_MASS   1000.0f
+#define MAX_SPEED   500.0f
+#define STR_HELPER(x) #x
+#define STRINGIFY(x) STR_HELPER(x)
 
-// UI Element Dimensions
-#define START_BUTTON_X 400
-#define START_BUTTON_Y 450
-#define START_BUTTON_WIDTH 200
-#define START_BUTTON_HEIGHT 50
 
-#define INPUT_FIELD_X 400
-#define INPUT_FIELD_Y 350
-#define INPUT_FIELD_WIDTH 200
-#define INPUT_FIELD_HEIGHT 40
+// forward-declare Particle so we can use a pointer without including particle.h
+struct Particle;
 
-#define RESET_BUTTON_X 850
-#define RESET_BUTTON_Y 20
-#define RESET_BUTTON_WIDTH 130
-#define RESET_BUTTON_HEIGHT 40
-
-// Declare global variables as extern
+//shared UI state (defined in window_handler.c)
 extern bool simulation_active;
-extern char input_text[MAX_INPUT_LENGTH];
 extern bool input_active;
+extern char input_text[128];
+
+// world projection
+void setup_coordinate_system(void);
+
+// menu input
+void handle_input(GLFWwindow* w, int key, int scancode, int action, int mods);
+
+// gas simulation menu UI
+void render_gas_ui(GLFWwindow* w, char* text_buf, bool* text_active, bool* out_simulation_active, int*  out_num);
+
+// impulse simulation menu UI
+void render_impulse_ui(GLFWwindow* w,char* m1_buf, char* m2_buf, char* v1_buf, char* v2_buf, bool* out_start);
 
 
+// simple button (top-left coords)
+bool draw_button(float x, float y, float w, float h,const char* label, double mx, double my, bool clicked);
 
-// Function Prototypes
-GLFWwindow* initialize_window(const char* title);
-void setup_coordinate_system();
-void terminate_window(GLFWwindow* window);
+void draw_label(float x, float y, const char* text);
+void draw_label_centered(float cx, float cy, float scale, const char* text);
+static bool draw_button_centered(float cx, float cy, float w, float h, const char* label, double mx, double my, bool clickedEdge);
 
-void render_rectangle(float x, float y, float width, float height, float r, float g, float b);
-void render_text(float x, float y, const char* text);
+void handle_char(GLFWwindow* w, unsigned int codepoint);
 
+// RESET during RUNNING sim: MUST NOT free particles. Only flips to menu state.
+bool handle_reset(GLFWwindow* w, struct Particle** particles, bool* simulation_active_ref, char* text_buf, int*  num_particles_ref);
 
-void trigger_temporary_text(const char* message, float duration);
+// Current world size (in window coords)
+void get_world_size(GLFWwindow* w, int* outW, int* outH);
 
-void render_temporary_text();
+// Centralized per-frame setup + auto-rescale on resize
+void window_begin_frame(GLFWwindow* w);
 
-void input_field();
-void start_button();
-void reset_button();
-
-void render_ui(GLFWwindow* window, char* input_text, bool* input_active, bool* simulation_active, int* num_particles);
-bool handle_reset(GLFWwindow* window, Particle** particles, bool* simulation_active, char* input_text, int* num_particles);
-
-bool is_mouse_in_rect(double mouse_x, double mouse_y, float x, float y, float width, float height);
-void handle_input(GLFWwindow* window, int key, int scancode, int action, int mods);
-
-#endif
+// Bind/unbind the active particle array so window handler can rescale on resize
+void window_bind_particles(struct Particle*** arr, int* count, bool scale_velocities);
+void window_unbind_particles(void);

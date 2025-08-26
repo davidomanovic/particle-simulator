@@ -1,9 +1,15 @@
-# Compiler and Flags
+# compiler & common flags
 CC      = gcc
 CFLAGS  = -Wall -Wextra -std=c99 -O2 -Iinclude -Ilibs/glfw/include \
           -Wno-missing-braces -Wno-unused-function -Wno-unused-parameter -Wno-stringop-truncation
 
-# Platform-specific
+APP_NAME   = particle_simulator
+SRC_DIR    = src
+SCRIPT_DIR = scripts
+OBJ_DIR    = bin/obj
+BIN_DIR    = bin
+
+# platform switches
 ifeq ($(OS),Windows_NT)
     CFLAGS  += -D_GLFW_WIN32
     LDFLAGS  = -lopengl32 -lgdi32 -luser32 -lshell32 -lwinmm -limm32
@@ -30,46 +36,40 @@ ifeq ($(OS),Windows_NT)
         libs/glfw/src/null_window.c \
         libs/glfw/src/null_joystick.c
 else
+    # assumes libglfw3-dev installed by CI; add more X11 libs if needed
     LDFLAGS  = -lglfw -lGL -lX11 -lpthread -lm
     GLFW_SRC =
 endif
 
-# Directories
-SRC_DIR    = src
-SCRIPT_DIR = scripts
-OBJ_DIR    = bin/obj
-BIN_DIR    = bin
+# sources / objects
+APP_SRC     = $(SRC_DIR)/main.c
+SRC_ALL     = $(wildcard $(SRC_DIR)/*.c)
+CORE_SRC    = $(filter-out $(APP_SRC), $(SRC_ALL))
+SCRIPT_SRC  = $(wildcard $(SCRIPT_DIR)/*.c)
 
-# Sources
-CORE_SRC = $(wildcard $(SRC_DIR)/*.c)
-CORE_OBJ = $(CORE_SRC:%.c=$(OBJ_DIR)/%.o)
-GLFW_OBJ = $(GLFW_SRC:%.c=$(OBJ_DIR)/%.o)
+CORE_OBJ    = $(CORE_SRC:%.c=$(OBJ_DIR)/%.o)
+SCRIPT_OBJ  = $(SCRIPT_SRC:%.c=$(OBJ_DIR)/%.o)
+GLFW_OBJ    = $(GLFW_SRC:%.c=$(OBJ_DIR)/%.o)
 
-# Executables
-SCRIPTS     = gas_simulation
-SCRIPT_BINS = $(SCRIPTS:%=$(BIN_DIR)/%)
+# default target
+.PHONY: all
+all: $(BIN_DIR)/$(APP_NAME)
 
-# Default target
-all: $(SCRIPT_BINS)
-
-.PHONY: check
-check: all
-	@if command -v xvfb-run >/dev/null 2>&1; then \
-	  echo "Headless smoke test..."; \
-	  timeout 5s xvfb-run -a ./bin/gas_simulation --headless --frames 10 || true; \
-	else \
-	  echo "No X; skipping run."; \
-	fi
-
-# Pattern rule: compile any .c into a .o under bin/obj
+# generic compile rule
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Link each script
-$(BIN_DIR)/%: $(SCRIPT_DIR)/%.c $(CORE_OBJ) $(GLFW_OBJ)
+# link the app
+$(BIN_DIR)/$(APP_NAME): $(APP_SRC) $(CORE_OBJ) $(SCRIPT_OBJ) $(GLFW_OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $< $(CORE_OBJ) $(GLFW_OBJ) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
+# CI-friendly check (doesn't run GUI)
+.PHONY: check
+check: all
+	@echo "Build OK; no headless tests to run."
+
+.PHONY: clean
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
