@@ -85,7 +85,6 @@ make
 
 3. Run the binaries from /bin (executable files) after building
 ```bash
-./bin/simulate_impulse
 ./bin/gas_simulation
 ```
 
