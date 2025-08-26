@@ -1,10 +1,10 @@
 # Particle Simulator
-<div align="center">
-  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXo1dDI1c2VrcGl2bm1zeHllZHJsNXBvdWRwaHM0aDhmc3VhNTJoayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/x13EuumwsHLCkm9cyr/giphy.gif" width="450" height="250" />
-</div>
 
 
 This project implements Verlet integration to simulate particle physics in C, using GLFW for real-time visualization. This is a buildable project via Make which generate a binary executable that can run the different scripts.
+<div align="center">
+  <img src="https://github.com/davidomanovic/particle-simulator/blob/main/assets/demo_program.gif" width="250" height="250" />
+</div>
 
 ---
 
