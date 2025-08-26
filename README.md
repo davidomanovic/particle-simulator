@@ -31,19 +31,29 @@ Verlet integration is a numerical method used to simulate the motion of particle
 - **Stable Verlet Integration**: Accurately simulates particle movement with position-based integration.
 - **GLFW Visualization**: Real-time rendering of particles in a 2D environment.
 - **Collision Handling**: Particle-to-particle and boundary collision detection with response.
-- **Interactive Simulations**: Modify parameters or spawn particles dynamically using keyboard inputs.
-- **Potential Field Dynamics**: Visualize and simulate particles in attractive or repulsive fields.
 - **Performance Efficient**: Handles a large number of particles smoothly.
-
+- 
 ---
+
+### Project Structure
+```makefile
+Verlet-Particles/
+├── bin/                # Compiled binaries
+├── include/            # Header files
+├── libs/               # External dependencies (e.g. GLFW, GLUT, Unity added as submodules)
+├── scripts/            # Example scripts (e.g., gas_simulation.c, impulse_simulation.c)
+├── src/                # Core simulation logic
+├── tests/              # Unit tests
+├── assets/             # Assets for visualization (e.g., GIFs, images)
+├── Makefile            # Build rules
+└── README.md           # Documentation
+```
 
 ## Requirements
 
 To build and run the project, ensure the following are installed:
 
-- **C compiler** (e.g., GCC or Clang)
-- **GLFW** library for OpenGL rendering
-- **GLAD** for OpenGL function loading (included with GLFW)
+- **C compiler** (e.g., GCC or Clang) - add it to your system environment PATH
 - **Make** for building the project
 
 ### Ubuntu Installation:
@@ -59,43 +69,25 @@ Install MSYS2 and use its package manager:
 pacman -S mingw-w64-x86_64-glfw mingw-w64-x86_64-gcc
 ```
 
-### Project Structure
-```makefile
-Verlet-Particles/
-├── bin/                # Compiled binaries
-├── include/            # Header files
-├── build/              # Build files
-├── libs/               # Dependencies (e.g. GLFW, GLUT, Unity)
-├── scripts/            # Example scripts (e.g., simulate_impulse.c, simulate_potential.c)
-├── src/                # Core simulation logic
-├── tests/              # Unit tests
-├── assets/             # Assets for visualization (e.g., GIFs, images)
-├── Makefile            # Build rules
-└── README.md           # Documentation
-```
 
+### How to use project
 
-### Installation
-1. Clone this repository:
+After installing necessary stuff, it is very straight forward to use my project.
+
+1. Clone the repository recursively:
 ```bash
-git clone https://github.com/davidomanovic/particle-simulator.git
-cd particle-simulator
+git clone --recursive https://github.com/davidomanovic/particle-simulator.git
 ```
-3. Clean the current build and build the project again:
+2. Build the project with `make` simply by writing in terminal (inside the project repo):
 ```bash
-make clean
 make
 ```
 
-### Usage
-5. Run the binaries from /bin (executable files) after building, or use prebuilt project
+3. Run the binaries from /bin (executable files) after building
 ```bash
 ./bin/simulate_impulse
 ./bin/gas_simulation
 ```
-
-## Keyboard controls
-- Spacebar: Spawn particles dynamically
 
 ## Contributions
 Contributions are welcome! Fork this repository, make your changes, and submit a pull request.
