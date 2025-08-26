@@ -17,6 +17,11 @@ typedef struct {
 
 TemporaryText temp_text = {NULL, 0.0, 0.0, false};
 
+
+static void error_callback(int error, const char* description) {
+    fprintf(stderr, "GLFW Error %d: %s\n", error, description);
+}
+
 GLFWwindow* initialize_window(const char* title) {
     if (!glfwInit()) {
         fprintf(stderr, "Failed to initialize GLFW\n");
