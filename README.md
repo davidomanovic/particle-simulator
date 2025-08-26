@@ -87,9 +87,9 @@ git clone --recursive https://github.com/davidomanovic/particle-simulator.git
 make
 ```
 
-3. Run the binaries from /bin (executable files) after building
+3. Run the simulator binary either by double clicking the executable inside the generated `bin/` folder, or simply in terminal
 ```bash
-./bin/gas_simulation
+./bin/particle_simulator.exe
 ```
 
 ## Contributions
