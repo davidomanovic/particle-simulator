@@ -29,8 +29,10 @@ static void draw_text_centered(float cx, float cy, float scale, const char* text
     float minX=1e9f,maxX=-1e9f,minY=1e9f,maxY=-1e9f;
     for (int i=0;i<quads*4;i++) {
         float* v = (float*)(buf + i*16);
-        if (v[0]<minX) minX=v[0]; if (v[0]>maxX) maxX=v[0];
-        if (v[1]<minY) minY=v[1]; if (v[1]>maxY) maxY=v[1];
+        if (v[0] < minX) minX = v[0];
+        if (v[0] > maxX) maxX = v[0];
+        if (v[1] < minY) minY = v[1];
+        if (v[1] > maxY) maxY = v[1];
     }
     float w = (maxX-minX)*scale, h = (maxY-minY)*scale;
     float x = cx - w*0.5f, y = cy - h*0.5f;

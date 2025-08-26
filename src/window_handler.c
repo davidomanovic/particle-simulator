@@ -14,6 +14,15 @@ static double g_max_msg_until = 0.0;
 static double g_hint_until = 0.0;
 static char   g_hint_text[64] = "";
 
+// world-size tracking
+static int g_prevW = -1, g_prevH = -1;
+
+static struct {
+    Particle*** arr;
+    int*  count;
+    bool  scale_vel;
+} g_bound = { NULL, NULL, false };
+
 
 // ---------- Internal helpers ----------
 static void set_ui_top_left(GLFWwindow* w, int* outW, int* outH) {
@@ -53,20 +62,38 @@ void draw_label(float x, float y, const char* text) {
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+static void draw_text_centered(float cx, float cy, float scale, const char* text) {
+    char buf[20000];
+    int quads = stb_easy_font_print(0, 0, (char*)text, NULL, buf, sizeof(buf));
+
+    float minX=1e9f,maxX=-1e9f,minY=1e9f,maxY=-1e9f;
+    for (int i=0; i<quads*4; ++i) {
+        float* v = (float*)(buf + i*16);
+        if (v[0] < minX) minX = v[0];
+        if (v[0] > maxX) maxX = v[0];
+        if (v[1] < minY) minY = v[1];
+        if (v[1] > maxY) maxY = v[1];
+    }
+    float w = (maxX-minX)*scale, h = (maxY-minY)*scale;
+    float x = cx - w*0.5f,       y = cy - h*0.5f;
+
+    glPushMatrix();
+    glTranslatef(x, y, 0);
+    glScalef(scale, scale, 1);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(2, GL_FLOAT, 16, buf);
+    glDrawArrays(GL_QUADS, 0, quads*4);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+    glPopMatrix();
+}
+
 static bool point_in(double px, double py, float x, float y, float w, float h) {
     return (px >= x && px <= x+w && py >= y && py <= y+h);
 }
 
 // ---------- Public API impls ----------
-// world-size tracking
-static int g_prevW = -1, g_prevH = -1;
-
-// currently bound particles (owned by the sim)
-static struct {
-    Particle*** arr;
-    int* count;
-    bool scale_vel;
-} g_bound = { NULL, NULL, false };
 
 void get_world_size(GLFWwindow* w, int* outW, int* outH) {
     int ww = 1000, wh = 1000;
@@ -75,8 +102,8 @@ void get_world_size(GLFWwindow* w, int* outW, int* outH) {
     if (outH) *outH = wh;
 }
 
-void window_bind_particles(struct Particle*** arr, int* count, bool scale_velocities) {
-    g_bound.arr = arr;
+void window_bind_particles(Particle*** arr, int* count, bool scale_velocities) {
+    g_bound.arr  = arr;
     g_bound.count = count;
     g_bound.scale_vel = scale_velocities;
 }
@@ -384,11 +411,7 @@ void render_gas_ui(GLFWwindow* w,
 }
 
 
-bool handle_reset(GLFWwindow* w,
-                  struct Particle** particles,
-                  bool*      simulation_active_ref,
-                  char*      text_buf,
-                  int*       num_particles_ref) {
+bool handle_reset(GLFWwindow* w,Particle** particles,bool* simulation_active_ref,char* text_buf,int*  num_particles_ref) {
     (void)particles; (void)num_particles_ref;
 
     int W, H; set_ui_top_left(w, &W, &H);

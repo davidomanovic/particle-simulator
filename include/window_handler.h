@@ -1,6 +1,7 @@
 #pragma once
 #include <stdbool.h>
 #include <GLFW/glfw3.h>
+#include "particle.h"
 
 #define WIDTH 1000
 #define HEIGHT 1000
@@ -9,10 +10,6 @@
 #define MAX_SPEED   500.0f
 #define STR_HELPER(x) #x
 #define STRINGIFY(x) STR_HELPER(x)
-
-
-// forward-declare Particle so we can use a pointer without including particle.h
-struct Particle;
 
 //shared UI state (defined in window_handler.c)
 extern bool simulation_active;
@@ -37,12 +34,11 @@ bool draw_button(float x, float y, float w, float h,const char* label, double mx
 
 void draw_label(float x, float y, const char* text);
 void draw_label_centered(float cx, float cy, float scale, const char* text);
-static bool draw_button_centered(float cx, float cy, float w, float h, const char* label, double mx, double my, bool clickedEdge);
 
 void handle_char(GLFWwindow* w, unsigned int codepoint);
 
 // RESET during RUNNING sim: MUST NOT free particles. Only flips to menu state.
-bool handle_reset(GLFWwindow* w, struct Particle** particles, bool* simulation_active_ref, char* text_buf, int*  num_particles_ref);
+bool handle_reset(GLFWwindow* w,Particle** particles,bool* simulation_active_ref,char* text_buf,int*  num_particles_ref);
 
 // Current world size (in window coords)
 void get_world_size(GLFWwindow* w, int* outW, int* outH);
@@ -51,5 +47,5 @@ void get_world_size(GLFWwindow* w, int* outW, int* outH);
 void window_begin_frame(GLFWwindow* w);
 
 // Bind/unbind the active particle array so window handler can rescale on resize
-void window_bind_particles(struct Particle*** arr, int* count, bool scale_velocities);
+void window_bind_particles(Particle*** arr, int* count, bool scale_velocities);
 void window_unbind_particles(void);
