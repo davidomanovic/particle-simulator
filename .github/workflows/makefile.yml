@@ -8,25 +8,50 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout (recursive)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential libglfw3-dev libglfw3 xorg-dev xvfb
+      # ---------- Linux ----------
+      - name: Install deps (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential xorg-dev mesa-common-dev libglfw3-dev
+      - name: Build (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: make -j"$(nproc)"
+      - name: Check (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: make check
 
-    - name: Start Xvfb
-      run: |
-        Xvfb :99 -screen 0 1024x768x16 &
-        export DISPLAY=:99
-
-    - name: Build project
-      run: make
-
-    - name: Run tests
-      run: make check
+      # ---------- Windows ----------
+      - name: Set up MSYS2 (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: >-
+            base-devel
+            mingw-w64-x86_64-gcc
+            make
+          update: true
+      - name: Build (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
+        run: |
+          make -j2 OS=Windows_NT
+      - name: Check (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
+        run: |
+          make check OS=Windows_NT
