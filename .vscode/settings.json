@@ -1,10 +1,14 @@
 {
     "files.associations": {
+        "*.in": "lmps",
+        "*.upf": "shellscript",
+        "*.m": "matlab",
         "movement.h": "c",
         "glfw3.h": "c",
         "draw_particle.h": "c",
         "scalar_potential.h": "c",
-        "gas_simulation.h": "c"
+        "gas_simulation.h": "c",
+        "stdlib.h": "c"
     },
     "cmake.ignoreCMakeListsMissing": true,
     "makefile.configureOnOpen": true
