@@ -5,6 +5,8 @@
 #define STB_EASY_FONT_IMPLEMENTATION
 #include "window_handler.h"
 #include "particle.h"
+#include "draw_particle.h"
+#include "movement.h"
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdlib.h>
