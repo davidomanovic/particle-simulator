@@ -1,9 +1,4 @@
-#include "window_handler.h"
-#include "particle.h"
 #include "gas_simulation.h"
-#include <GLFW/glfw3.h>
-#include <stdbool.h>
-#include <stdlib.h>
 
 static void free_particles_array(Particle*** arr, int* count) {
     if (arr && *arr) {

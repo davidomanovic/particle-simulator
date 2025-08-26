@@ -80,9 +80,6 @@ static bool draw_button_centered(float cx, float cy, float w, float h,
 }
 // --- menu -------------------------------------------------------------------
 AppState run_menu(GLFWwindow* window, int /*width*/, int /*height*/) {
-    // button sizes (in pixels)
-    const float bw = 260.f, bh = 70.f, gap = 30.f;
-
     int prevDown = GLFW_RELEASE;
 
     while (!glfwWindowShouldClose(window)) {

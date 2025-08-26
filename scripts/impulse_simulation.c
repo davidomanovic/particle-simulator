@@ -1,12 +1,5 @@
 // scripts/impulse_simulation.c
-#include "window_handler.h"
-#include "particle.h"
-#include "movement.h"      // <-- use your existing physics helpers
-#include <GLFW/glfw3.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+#include "impulse_simulation.h"
 
 // simple colored disc (so we can color A/B differently)
 static void draw_disc(float cx, float cy, float r) {
