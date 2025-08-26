@@ -4,7 +4,7 @@
 </div>
 
 
-This project implements Verlet integration to simulate particle physics in C, using GLFW for real-time visualization. You can directly run the `verlet_simulator` or other scripts (e.g., `simulate_impulse`, `simulate_potential`) inside `/bin`. The goal is to provide simple and visual simulations of particle physics. Currently implemented examples include gravity simulation, collision response, impulse dynamics, gas in a box, and particles in a potential field. Work on 3D simulations is in progress! 😄
+This project implements Verlet integration to simulate particle physics in C, using GLFW for real-time visualization. This is a buildable project via Make which generate a binary executable that can run the different scripts.
 
 ---
 
@@ -59,8 +59,12 @@ To build and run the project, ensure the following are installed:
 ### Ubuntu Installation:
 
 ```bash
-sudo apt-get update
-sudo apt-get install libglfw3-dev libglfw3 xorg-dev build-essential make
+sudo apt update
+sudo apt install -y build-essential \
+  libgl1-mesa-dev mesa-common-dev \
+  libx11-dev xorg-dev \
+  libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
+  libglfw3-dev
 ```
 
 ### Windows Installation:
