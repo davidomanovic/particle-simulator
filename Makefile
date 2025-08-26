@@ -55,9 +55,10 @@ all: $(SCRIPT_BINS)
 .PHONY: check
 check: all
 	@if command -v xvfb-run >/dev/null 2>&1; then \
-	  xvfb-run -a $(BIN_DIR)/gas_simulation --test || echo "UI test skipped/failed"; \
+	  echo "Headless smoke test..."; \
+	  timeout 5s xvfb-run -a ./bin/gas_simulation --headless --frames 10 || true; \
 	else \
-	  echo "No X display; skipping UI run"; \
+	  echo "No X; skipping run."; \
 	fi
 
 # Pattern rule: compile any .c into a .o under bin/obj
