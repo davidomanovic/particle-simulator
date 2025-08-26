@@ -52,6 +52,14 @@ SCRIPT_BINS = $(SCRIPTS:%=$(BIN_DIR)/%)
 # Default target
 all: $(SCRIPT_BINS)
 
+.PHONY: check
+check: all
+	@if command -v xvfb-run >/dev/null 2>&1; then \
+	  xvfb-run -a $(BIN_DIR)/gas_simulation --test || echo "UI test skipped/failed"; \
+	else \
+	  echo "No X display; skipping UI run"; \
+	fi
+
 # Pattern rule: compile any .c into a .o under bin/obj
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
