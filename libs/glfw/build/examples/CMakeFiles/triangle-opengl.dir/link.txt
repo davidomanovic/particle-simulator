@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\triangle-opengl.dir/objects.a
-C:\mingw64\bin\llvm-ar.exe qc CMakeFiles\triangle-opengl.dir/objects.a @CMakeFiles\triangle-opengl.dir\objects1.rsp
-C:\mingw64\bin\clang.exe -mwindows -Wl,--whole-archive CMakeFiles\triangle-opengl.dir/objects.a -Wl,--no-whole-archive -o triangle-opengl.exe -Wl,--out-implib,libtriangle-opengl.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\triangle-opengl.dir\linkLibs.rsp

@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\allocator.dir/objects.a
-C:\mingw64\bin\llvm-ar.exe qc CMakeFiles\allocator.dir/objects.a @CMakeFiles\allocator.dir\objects1.rsp
-C:\mingw64\bin\clang.exe -Wl,--whole-archive CMakeFiles\allocator.dir/objects.a -Wl,--no-whole-archive -o allocator.exe -Wl,--out-implib,liballocator.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\allocator.dir\linkLibs.rsp
