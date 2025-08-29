@@ -10,6 +10,8 @@
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <math.h>
 
 bool simulate_gas(GLFWwindow* window);
+
 #endif // GAS_SIMULATION_H

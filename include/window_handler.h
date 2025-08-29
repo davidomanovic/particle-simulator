@@ -2,6 +2,12 @@
 #include <stdbool.h>
 #include <GLFW/glfw3.h>
 #include "particle.h"
+#include <GL/gl.h>       
+#include <stdio.h>
+#include "particle.h"     
+#include <string.h>
+#include <stdlib.h>
+#include "stb_easy_font.h"  
 
 #define WIDTH 1000
 #define HEIGHT 1000
@@ -15,6 +21,12 @@
 extern bool simulation_active;
 extern bool input_active;
 extern char input_text[128];
+extern float g_temp_c;         
+extern float g_temperature;   
+
+// Draw a horizontal slider
+void ui_draw_temperature_slider(GLFWwindow* w, float* value_c, float min_c, float max_c);
+
 
 // world projection
 void setup_coordinate_system(void);
@@ -24,10 +36,10 @@ void handle_input(GLFWwindow* w, int key, int scancode, int action, int mods);
 
 // gas simulation menu UI
 void render_gas_ui(GLFWwindow* w, char* text_buf, bool* text_active, bool* out_simulation_active, int*  out_num);
+void ui_draw_temperature_slider(GLFWwindow* w, float* value, float min, float max);
 
 // impulse simulation menu UI
 void render_impulse_ui(GLFWwindow* w,char* m1_buf, char* m2_buf, char* v1_buf, char* v2_buf, bool* out_start);
-
 
 // simple button (top-left coords)
 bool draw_button(float x, float y, float w, float h,const char* label, double mx, double my, bool clicked);

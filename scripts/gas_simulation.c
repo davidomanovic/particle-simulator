@@ -21,24 +21,26 @@ bool simulate_gas(GLFWwindow* window) {
     Particle** particles = NULL;
     int num_particles = 0;
 
+    // temperature control
+    static float prev_temp = 1.0f;
+    g_temperature = 1.0f;
+    prev_temp = g_temperature;
+
     double last = glfwGetTime();
     int prevMouseDown = GLFW_RELEASE;
     bool suppress_menu_click = false;
 
-    // one-time GL state
     glDisable(GL_DEPTH_TEST);
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-
-        // *** window handler owns viewport/projection + auto-rescale on resize
-        window_begin_frame(window);
+        window_begin_frame(window);      // sets viewport + bottom-left world
 
         double now = glfwGetTime();
         double dt  = now - last; last = now;
         if (dt > 0.1) dt = 0.1;
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { go_back = true; break; }
 
@@ -46,7 +48,8 @@ bool simulate_gas(GLFWwindow* window) {
             render_gas_ui(window, input_text, &input_active, &simulation_active, &num_particles);
             glfwSetKeyCallback(window, handle_input);
 
-            {   // Return to main (menu-only)
+            // "Return to Main Menu" only on this screen
+            {
                 int w, h; get_world_size(window, &w, &h);
                 glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(0, w, h, 0, -1, 1);
                 glMatrixMode(GL_MODELVIEW);  glLoadIdentity();
@@ -66,10 +69,10 @@ bool simulate_gas(GLFWwindow* window) {
             }
 
             if (simulation_active) {
+                // parse and clamp count
                 int val = (int)strtol(input_text, NULL, 10);
                 if (val < 1) val = 1;
                 if (val > MAX_PARTICLES) val = MAX_PARTICLES;
-                num_particles = val;
 
                 int worldW, worldH; get_world_size(window, &worldW, &worldH);
 
@@ -77,19 +80,18 @@ bool simulate_gas(GLFWwindow* window) {
                 num_particles = val;
                 particles = (Particle**)malloc((size_t)num_particles * sizeof(Particle*));
                 initialize_particles(&particles, num_particles, 10.0f, worldW, worldH);
-
-                // *** tell window handler which particles to rescale on future resizes
                 window_bind_particles(&particles, &num_particles, /*scale_velocities=*/true);
 
                 prevMouseDown = GLFW_RELEASE;
                 suppress_menu_click = true;
+
+                g_temperature = 1.0f;
+                prev_temp = g_temperature;
             }
         } else {
-            // still keep UI top-left for reset button drawing
-            int w, h; get_world_size(window, &w, &h);
 
+            int w, h; get_world_size(window, &w, &h);
             if (handle_reset(window, particles, &simulation_active, input_text, &num_particles)) {
-                // stop auto-rescaling before freeing
                 window_unbind_particles();
                 free_particles_array(&particles, &num_particles);
                 prevMouseDown = GLFW_RELEASE;
@@ -97,7 +99,6 @@ bool simulate_gas(GLFWwindow* window) {
                 goto swap_and_continue;
             }
 
-            // physics using *current* world size
             for (int i = 0; i < num_particles; ++i) {
                 integrate(particles[i], (float)dt);
                 handle_wall_collision(particles[i], w, h);
@@ -110,13 +111,42 @@ bool simulate_gas(GLFWwindow* window) {
 
             for (int i = 0; i < num_particles; ++i)
                 draw_particle(particles[i]);
+            
+            glDisable(GL_DEPTH_TEST);
+            glDepthMask(GL_FALSE);
+            ui_draw_temperature_slider(window, &g_temp_c, 0.1f, 200.0f);
+
+            float T0 = 60.0f;
+            if (g_temp_c < 1.0f) g_temp_c = 1.0f;  
+            float new_scale = sqrtf(g_temp_c / T0);
+            if (new_scale <= 0.0f) new_scale = 0.01f;
+
+            if (fabsf(new_scale - prev_temp) > 1e-6f) {
+                float s = new_scale / prev_temp;
+                for (int i = 0; i < num_particles; ++i) {
+                    particles[i]->vx *= s;
+                    particles[i]->vy *= s;
+                }
+                g_temperature = new_scale;
+                prev_temp = new_scale;
+            }
+
+            if (handle_reset(window, particles, &simulation_active, input_text, &num_particles)) {
+                window_unbind_particles();
+                free_particles_array(&particles, &num_particles);
+                prevMouseDown = GLFW_RELEASE;
+                suppress_menu_click = true;
+                glDepthMask(GL_TRUE);
+                goto swap_and_continue;
+            }
+
+            glDepthMask(GL_TRUE);
         }
 
 swap_and_continue:
         glfwSwapBuffers(window);
     }
 
-    // unbind on exit and free
     window_unbind_particles();
     free_particles_array(&particles, &num_particles);
     return go_back;

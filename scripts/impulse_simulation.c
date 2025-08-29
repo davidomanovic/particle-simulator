@@ -1,7 +1,7 @@
 // scripts/impulse_simulation.c
 #include "impulse_simulation.h"
 
-// simple colored disc (so we can color A/B differently)
+// simple colored disc 
 static void draw_disc(float cx, float cy, float r) {
     const int N = 48;
     glBegin(GL_TRIANGLE_FAN);
@@ -71,7 +71,6 @@ bool simulate_impulse(GLFWwindow* window) {
             bool start = false;
             render_impulse_ui(window, m1_buf, m2_buf, v1_buf, v2_buf, &start);
 
-            // menu-only "Return to Main Menu"
             {
                 int w, h; get_world_size(window, &w, &h);
                 glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(0, w, h, 0, -1, 1);
@@ -92,14 +91,11 @@ bool simulate_impulse(GLFWwindow* window) {
             }
 
             if (start) {
-                // parse/clamp
                 m1  = (float)strtod(m1_buf, NULL); if (m1 <= 0.f) m1 = 1.f; if (m1 > MAX_MASS) m1 = MAX_MASS;
                 m2  = (float)strtod(m2_buf, NULL); if (m2 <= 0.f) m2 = 1.f; if (m2 > MAX_MASS) m2 = MAX_MASS;
-
                 vx1 = (float)strtod(v1_buf, NULL); if (fabsf(vx1) > MAX_SPEED) vx1 = copysignf(MAX_SPEED, vx1);
                 vx2 = (float)strtod(v2_buf, NULL); if (fabsf(vx2) > MAX_SPEED) vx2 = copysignf(MAX_SPEED, vx2);
 
-                // Normalize buffers to reflect the clamped numbers (keeps UI consistent)
                 snprintf(m1_buf, 32, "%.0f", (double)m1);
                 snprintf(m2_buf, 32, "%.0f", (double)m2);
                 snprintf(v1_buf, 32, "%.2f", (double)vx1);
@@ -108,11 +104,9 @@ bool simulate_impulse(GLFWwindow* window) {
                 int w, h; get_world_size(window, &w, &h);
                 const float y = h * 0.5f;
 
-                // radius ~ sqrt(mass) with sanity clamps
                 const float r1 = fmaxf(6.f, 3.0f * sqrtf(m1));
                 const float r2 = fmaxf(6.f, 3.0f * sqrtf(m2));
 
-                // spawn with non-overlapping separation
                 float x1 = (float)w * 0.30f;
                 float x2 = (float)w * 0.70f;
                 if (x2 - x1 < (r1 + r2 + 4.f)) {
@@ -127,11 +121,9 @@ bool simulate_impulse(GLFWwindow* window) {
                 particles[0] = create_particle(x1, y, m1, r1);
                 particles[1] = create_particle(x2, y, m2, r2);
 
-                // set initial velocities (movement.c uses vx/vy in integrate)
                 particles[0]->vx = vx1; particles[0]->vy = 0.f;
                 particles[1]->vx = vx2; particles[1]->vy = 0.f;
 
-                // let window handler rescale on resize (scale velocities too)
                 window_bind_particles(&particles, &num_particles, /*scale_velocities=*/true);
 
                 running = true;
@@ -142,7 +134,6 @@ bool simulate_impulse(GLFWwindow* window) {
             int w, h; get_world_size(window, &w, &h);
             if (w <= 0 || h <= 0) { glfwSwapBuffers(window); continue; }
 
-            // Reset → back to impulse menu
             if (handle_reset(window, particles, &running, NULL, &num_particles)) {
                 window_unbind_particles();
                 free_particles_array(&particles, &num_particles);
@@ -155,24 +146,19 @@ bool simulate_impulse(GLFWwindow* window) {
             Particle* A = particles[0];
             Particle* B = particles[1];
 
-            // Zero forces (no gravity). If you ever want gravity, add apply_force(...).
-            // integrate using your movement.c (semi-implicit Euler, stable with small dt)
             integrate(A, (float)dt);
             integrate(B, (float)dt);
 
-            // collide with walls (perfectly elastic in your helper)
             handle_wall_collision(A, w, h);
             handle_wall_collision(B, w, h);
 
-            // pair collision (your helper resolves overlap + elastic impulse)
             if (check_collision(A, B)) {
                 collision_force(A, B);
             }
 
-            // draw with distinct colors
-            glColor3f(0.15f, 0.75f, 1.0f);   // A = cyan-ish
+            glColor3f(0.15f, 0.75f, 1.0f);  
             draw_disc(A->x, A->y, A->radius);
-            glColor3f(1.0f, 0.35f, 0.2f);   // B = orange-red
+            glColor3f(1.0f, 0.35f, 0.2f);   
             draw_disc(B->x, B->y, B->radius);
         }
 

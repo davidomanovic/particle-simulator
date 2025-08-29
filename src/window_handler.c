@@ -1,20 +1,13 @@
 #include "window_handler.h"
-#include <GL/gl.h>          // opengl32 on Windows
-#include <stdio.h>
-#include "particle.h"     
-#include <string.h>
-#include <stdlib.h>
-#include "stb_easy_font.h"  
 
-// ---------- Single definitions for shared state ----------
 bool simulation_active = false;
 bool input_active      = false;
 char input_text[128]   = "";
 static double g_max_msg_until = 0.0;
 static double g_hint_until = 0.0;
 static char   g_hint_text[64] = "";
-
-// world-size tracking
+float g_temp_c = 30.0f;   
+float g_temperature = 1.0f;
 static int g_prevW = -1, g_prevH = -1;
 
 static struct {
@@ -24,10 +17,10 @@ static struct {
 } g_bound = { NULL, NULL, false };
 
 
-// ---------- Internal helpers ----------
+// Internal helpers
 static void set_ui_top_left(GLFWwindow* w, int* outW, int* outH) {
     int W, H;
-    glfwGetWindowSize(w, &W, &H);   // <<< window size, not framebuffer
+    glfwGetWindowSize(w, &W, &H); 
     if (outW) *outW = W;
     if (outH) *outH = H;
 
@@ -42,7 +35,6 @@ static bool buf_has_char(const char* s, char c){
     for (; *s; ++s) if (*s == c) return true;
     return false;
 }
-
 
 static void draw_rect(float x, float y, float w, float h, int filled) {
     glBegin(filled ? GL_QUADS : GL_LINE_LOOP);
@@ -93,8 +85,7 @@ static bool point_in(double px, double py, float x, float y, float w, float h) {
     return (px >= x && px <= x+w && py >= y && py <= y+h);
 }
 
-// ---------- Public API impls ----------
-
+// Public API impls
 void get_world_size(GLFWwindow* w, int* outW, int* outH) {
     int ww = 1000, wh = 1000;
     if (w) glfwGetWindowSize(w, &ww, &wh);
@@ -118,7 +109,6 @@ void draw_label_centered(float cx, float cy, float scale, const char* text) {
     char buffer[16384];
     int quads = stb_easy_font_print(0, 0, (char*)text, NULL, buffer, sizeof(buffer));
 
-    // Compute width & height in "stb font units" (each quad is 8x12 approx)
     float minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
     for (int i = 0; i < quads*4; ++i) {
         float* v = (float*)(buffer + i*16);
@@ -133,7 +123,6 @@ void draw_label_centered(float cx, float cy, float scale, const char* text) {
     float offsetX = cx - w*0.5f;
     float offsetY = cy - h*0.5f;
 
-    // Transform
     glPushMatrix();
     glTranslatef(offsetX, offsetY, 0);
     glScalef(scale, scale, 1);
@@ -197,7 +186,6 @@ void window_begin_frame(GLFWwindow* w) {
                 if (!p) continue;
                 p->x *= sx;  p->y *= sy;
                 if (g_bound.scale_vel) { p->vx *= sx; p->vy *= sy; }
-                // clamp inside new bounds
                 if (p->x < p->radius) p->x = p->radius;
                 if (p->y < p->radius) p->y = p->radius;
                 if (p->x > ww - p->radius) p->x = ww - p->radius;
@@ -286,8 +274,7 @@ void handle_char(GLFWwindow* w, unsigned int codepoint) {
 }
 
 
-bool draw_button(float x, float y, float w, float h,
-                 const char* label, double mx, double my, bool clicked) {
+bool draw_button(float x, float y, float w, float h,const char* label, double mx, double my, bool clicked) {
     bool hover = point_in(mx, my, x, y, w, h);
 
     glColor3f(hover ? 0.30f : 0.20f, 0.40f, 0.90f);
@@ -302,31 +289,22 @@ bool draw_button(float x, float y, float w, float h,
     return hover && clicked;
 }
 
-void render_gas_ui(GLFWwindow* w,
-               char*       text_buf,
-               bool*       text_active,
-               bool*       out_simulation_active,
-               int*        out_num)
-{
-    // --- layout sizes ---
+void render_gas_ui(GLFWwindow* w,char* text_buf,bool* text_active,bool* out_simulation_active,int* out_num){
     const float fieldW = 420.f, fieldH = 56.f;
     const float btnW   = 56.f,  btnH   = 56.f;
     const float gap    = 14.f;
     const float startW = 200.f, startH = 60.f;
 
-    // --- UI space (TOP-LEFT, window coords) ---
     int W, H;
     glfwGetWindowSize(w, &W, &H);
     glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(0, W, H, 0, -1, 1);
     glMatrixMode(GL_MODELVIEW);  glLoadIdentity();
 
-    // --- center anchors ---
     float cx = W * 0.5f;
     float cy = H * 0.5f;
     
     const char* maxMsg = "Max " STRINGIFY(MAX_PARTICLES) " particles!"; // helper below
 
-    // positions
     float fieldX = cx - fieldW * 0.5f;
     float fieldY = cy - fieldH * 0.5f;
     float minusX = fieldX + fieldW + gap;
@@ -336,27 +314,48 @@ void render_gas_ui(GLFWwindow* w,
     float startX = cx - startW * 0.5f;
     float startY = fieldY + fieldH + 2*gap;
 
-    // mouse / click edge
     static int prevDown = GLFW_RELEASE;
     double mx, my; glfwGetCursorPos(w, &mx, &my);
     int down = glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_LEFT);
     bool clicked = (prevDown == GLFW_RELEASE && down == GLFW_PRESS);
     prevDown = down;
 
-    // title
     draw_label(cx - 140, fieldY - 60, "Gas Simulation - Particle count");
 
-    // input box
     bool overInput = (mx >= fieldX && mx <= fieldX+fieldW && my >= fieldY && my <= fieldY+fieldH);
     glColor3f(overInput ? 0.25f : 0.18f, 0.18f, 0.18f);  // fill
     glBegin(GL_QUADS); glVertex2f(fieldX,fieldY); glVertex2f(fieldX+fieldW,fieldY);
                       glVertex2f(fieldX+fieldW,fieldY+fieldH); glVertex2f(fieldX,fieldY+fieldH); glEnd();
-    glColor3f(1,1,1);  // border
+    glColor3f(1,1,1); 
     glBegin(GL_LINE_LOOP); glVertex2f(fieldX,fieldY); glVertex2f(fieldX+fieldW,fieldY);
                           glVertex2f(fieldX+fieldW,fieldY+fieldH); glVertex2f(fieldX,fieldY+fieldH); glEnd();
 
-    if (clicked && overInput) { *text_active = true;  input_active = true;  glfwSetKeyCallback(w, handle_input); }
-    else if (clicked && !overInput) { *text_active = false; input_active = false; }
+    if (clicked && overInput) {
+    // focus: enable editing + callbacks
+    *text_active = true;
+    input_active = true;
+    glfwSetKeyCallback(w, handle_input);
+    glfwSetCharCallback(w, handle_char);
+
+    // seed edit buffer from current field content
+    if (text_buf) {
+        size_t n = strnlen(text_buf, sizeof(input_text) - 1);
+        memcpy(input_text, text_buf, n);
+        input_text[n] = '\0';
+        } else {
+            input_text[0] = '\0';
+        }
+    } else if (clicked && !overInput) {
+        // blur: stop editing
+        *text_active = false;
+        input_active = false;
+    }
+
+    if (*text_active && text_buf) {
+    size_t n = strnlen(input_text, 127);
+    memcpy(text_buf, input_text, n);
+    text_buf[n] = '\0';
+    }
 
     {
         char* buf = (text_buf && text_buf[0]) ? text_buf : input_text;
@@ -365,12 +364,11 @@ void render_gas_ui(GLFWwindow* w,
             if (v > MAX_PARTICLES) {
                 v = MAX_PARTICLES;
                 snprintf(buf, 128, "%ld", v);
-                g_max_msg_until = glfwGetTime() + 2.0; // show message for 2 seconds
+                g_max_msg_until = glfwGetTime() + 2.0; 
             }
         }
     }
     
-    // show typed text
     char shown[160];
     snprintf(shown, sizeof(shown), "%s%s", text_buf ? text_buf : input_text, (*text_active ? "_" : ""));
     draw_label(fieldX + 12, fieldY + 34, shown);
@@ -391,7 +389,6 @@ void render_gas_ui(GLFWwindow* w,
     }
     
     if (glfwGetTime() < g_max_msg_until) {
-    // place the message just above the input
     draw_label(cx - 110, fieldY - 30, maxMsg);
     }
 
@@ -411,8 +408,12 @@ void render_gas_ui(GLFWwindow* w,
 }
 
 
-bool handle_reset(GLFWwindow* w,Particle** particles,bool* simulation_active_ref,char* text_buf,int*  num_particles_ref) {
+bool handle_reset(GLFWwindow* w, Particle** particles, bool* simulation_active_ref,char* text_buf, int* num_particles_ref){
     (void)particles; (void)num_particles_ref;
+
+    GLboolean depth_enabled = glIsEnabled(GL_DEPTH_TEST);
+    glDisable(GL_DEPTH_TEST);
+    glDepthMask(GL_FALSE);
 
     int W, H; set_ui_top_left(w, &W, &H);
 
@@ -422,22 +423,24 @@ bool handle_reset(GLFWwindow* w,Particle** particles,bool* simulation_active_ref
     bool clicked = (prevDown == GLFW_RELEASE && down == GLFW_PRESS);
     prevDown = down;
 
-    if (draw_button(10, 10, 140, 46, "Reset", mx, my, clicked)) {
+    bool hit = draw_button(10, 10, 140, 46, "Reset", mx, my, clicked);
+
+    // restore depth state
+    glDepthMask(GL_TRUE);
+    if (depth_enabled) glEnable(GL_DEPTH_TEST);
+
+    if (hit) {
         if (simulation_active_ref) *simulation_active_ref = false; // back to gas menu
         if (text_buf) text_buf[0] = '\0';
-        return true;  // caller frees and stays inside simulate_gas()
+        return true;
     }
     return false;
 }
 
-void render_impulse_ui(GLFWwindow* w,
-                       char* m1_buf,
-                       char* m2_buf,
-                       char* v1_buf,
-                       char* v2_buf,
-                       bool* out_start)
+
+void render_impulse_ui(GLFWwindow* w,char* m1_buf, char* m2_buf, char* v1_buf, char* v2_buf,bool* out_start)
 {
-    enum { UI_FIELD_CAP = 32 };      // your field buffers are char[32]
+    enum { UI_FIELD_CAP = 32 };    
     const size_t UI_COPY_MAX = UI_FIELD_CAP - 1;
 
     int W, H; glfwGetWindowSize(w, &W, &H);
@@ -467,7 +470,6 @@ void render_impulse_ui(GLFWwindow* w,
 
     static int focus = -1;
 
-    // title + (optional) hint
     draw_label(cx - 150, firstY - 28, "Impulse Simulation Parameters");
     if (glfwGetTime() < g_hint_until && g_hint_text[0]) {
         draw_label(cx - 120, firstY - 48, g_hint_text);
@@ -568,3 +570,78 @@ void render_impulse_ui(GLFWwindow* w,
     if (doStart) { focus = -1; input_active = false; }
 }
 
+void ui_draw_temperature_slider(GLFWwindow* w, float* value_c, float min_c, float max_c) {
+    if (!value_c) return;
+
+    int W, H;
+    set_ui_top_left(w, &W, &H);  
+    const float margin = 20.0f;
+    const float trackW = 280.0f;
+    const float trackH = 8.0f;
+    const float knobW  = 14.0f;
+    const float knobH  = 24.0f;
+
+    const float labelH = 18.0f;
+
+    float trackX = W - margin - trackW;
+    float trackY = H - margin - knobH;            
+    float knobY  = trackY + 4.0f;                         
+    float labelX = trackX;
+    float labelY = trackY - labelH - 6.0f;          
+
+    char label[96];
+    float v = *value_c;
+    if (v < min_c) v = min_c; 
+    if (v > max_c) v = max_c;
+    snprintf(label, sizeof(label), "Temperature: %.0f C", v);
+
+    float bgX = labelX - 6.0f;
+    float bgY = labelY + 10.0f;
+    float bgW = 120.0f;  // wide enough for the label
+    float bgH = 25.0f;
+
+    glColor4f(0.0f, 0.0f, 0.0f, 0.6f); // semi-transparent black
+    glBegin(GL_QUADS);
+        glVertex2f(bgX, bgY);
+        glVertex2f(bgX + bgW, bgY);
+        glVertex2f(bgX + bgW, bgY + bgH);
+        glVertex2f(bgX, bgY + bgH);
+    glEnd();
+
+    // --- Draw label text in white ---
+    glColor3f(1,1,1);
+    draw_label(labelX, labelY + 16, label);
+
+    // Track
+    glColor3f(0.30f, 0.30f, 0.30f);
+    draw_rect(trackX, knobY + (knobH - trackH) * 0.5f, trackW, trackH, 1);
+
+    // Mouse
+    static int dragging = 0;
+    double mx, my; glfwGetCursorPos(w, &mx, &my);
+    int down = glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_LEFT);
+
+    float t = (v - min_c) / (max_c - min_c);
+    if (t < 0) t = 0; if (t > 1) t = 1;
+    float knobX = trackX + t * trackW;
+
+    bool over =
+        point_in(mx, my, knobX - knobW * 0.5f, knobY, knobW, knobH) ||
+        point_in(mx, my, trackX, knobY - 6.0f, trackW, knobH + 12.0f);
+
+    if (!dragging && down == GLFW_PRESS && over) dragging = 1;
+    if (dragging && down == GLFW_RELEASE) dragging = 0;
+
+    if (dragging) {
+        float u = (float)((mx - trackX) / trackW);
+        if (u < 0) u = 0; if (u > 1) u = 1;
+        v = min_c + u * (max_c - min_c);
+        *value_c = v;
+        knobX = trackX + u * trackW;
+    }
+
+    glColor3f(over ? 0.90f : 0.85f, 0.85f, over ? 0.90f : 0.85f);
+    draw_rect(knobX - knobW * 0.5f, knobY, knobW, knobH, 1);
+    glColor3f(1,1,1);
+    draw_rect(knobX - knobW * 0.5f, knobY, knobW, knobH, 0);
+}
